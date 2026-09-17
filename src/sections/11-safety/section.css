@@ -10,8 +10,7 @@
 
 .s-safety__media { display: grid; gap: 12px; }
 .s-safety__photo img { object-position: center 30%; }
-.s-safety__sub { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
-.s-safety__sub img { object-position: center 45%; }
+.s-safety__wide img { object-position: center 45%; }
 
 .s-safety__evidence { margin-top: clamp(32px, 4vw, 48px); background: var(--surface); border-left: 3px solid var(--blue-600); }
 .s-safety__evidence-text { font-size: var(--fs-sm); line-height: 1.95; color: var(--text-2); }

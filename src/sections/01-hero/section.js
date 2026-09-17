@@ -363,7 +363,7 @@ function boot(root) {
 
   /* dashed ground track between the two pads */
   {
-    const N = 200, halfW = 2.3;
+    const N = 200, halfW = 1.05;
     const pts = [], verts = [], uvs = [], idx = [];
     for (let i = 0; i <= N; i++) {
       const p = curve.getPointAt((i / N) * U_DROP);
@@ -374,7 +374,7 @@ function boot(root) {
       const p = pts[i], a = pts[Math.max(0, i - 1)], b = pts[Math.min(N, i + 1)];
       const dx = b.x - a.x, dz = b.z - a.z, l = Math.hypot(dx, dz) || 1;
       if (i > 0) run += Math.hypot(p.x - pts[i - 1].x, p.z - pts[i - 1].z);
-      const nx = -dz / l, nz = dx / l, uu = run / 13;
+      const nx = -dz / l, nz = dx / l, uu = run / 5.5;
       verts.push(p.x + nx * halfW, p.y, p.z + nz * halfW, p.x - nx * halfW, p.y, p.z - nz * halfW);
       uvs.push(uu, 1, uu, 0);
       if (i < N) { const k = i * 2; idx.push(k, k + 1, k + 2, k + 1, k + 3, k + 2); }
@@ -384,7 +384,7 @@ function boot(root) {
     g.setAttribute('uv', new BufferAttribute(new Float32Array(uvs), 2));
     g.setIndex(idx);
     scene.add(new Mesh(g, new MeshBasicMaterial({
-      map: dashTexture(), color: 0xbcdcff, transparent: true, opacity: 0.4,
+      map: dashTexture(), color: 0xbcdcff, transparent: true, opacity: 0.26,
       depthWrite: false, side: DoubleSide, fog: true,
       polygonOffset: true, polygonOffsetFactor: -6, polygonOffsetUnits: -6,
     })));
@@ -395,6 +395,7 @@ function boot(root) {
   function makePad(px, pz, hue) {
     const g = new Group();
     g.position.set(px, terrainH(px, pz) + 1.8, pz);
+    g.scale.setScalar(0.62);
     const add = (geo, opacity, blend) => {
       const par = { color: hue, transparent: true, opacity, side: DoubleSide, depthWrite: false, fog: true };
       if (blend) par.blending = blend;
@@ -403,11 +404,11 @@ function boot(root) {
       g.add(m);
       return m;
     };
-    add(new RingGeometry(10.6, 12.1, 72), 0.85);
-    add(new CircleGeometry(10.3, 48), 0.12);
-    add(new RingGeometry(3.0, 3.9, 40), 0.5);
+    add(new RingGeometry(10.6, 12.1, 72), 0.42);
+    add(new CircleGeometry(10.3, 48), 0.08);
+    add(new RingGeometry(3.0, 3.9, 40), 0.28);
     for (let i = 0; i < 2; i++) {
-      const m = add(new RingGeometry(11.5, 12.7, 64), 0.5, AdditiveBlending);
+      const m = add(new RingGeometry(11.5, 12.7, 64), 0.22, AdditiveBlending);
       m.position.y = 0.7;
       pulses.push({ m, off: i * 0.5 });
     }
@@ -439,7 +440,7 @@ function boot(root) {
   const rotors = [];
   const rotorTex = rotorTexture();
   const glowTex = glowTexture();
-  const diskGeo = new CircleGeometry(0.78, 34);
+  const diskGeo = new CircleGeometry(0.88, 36);
   diskGeo.rotateX(-Math.PI / 2);
   const armGeo = new CylinderGeometry(0.078, 0.062, 1.3, 10);
   armGeo.rotateZ(Math.PI / 2);
@@ -460,7 +461,7 @@ function boot(root) {
     craft.add(mast);
     for (let k = 0; k < 2; k++) {
       const disk = new Mesh(diskGeo, new MeshBasicMaterial({
-        map: rotorTex, color: 0xd4e4f5, transparent: true, opacity: k ? 0.3 : 0.36,
+        map: rotorTex, color: 0xdceaf8, transparent: true, opacity: k ? 0.42 : 0.5,
         depthWrite: false, side: DoubleSide, fog: true,
       }));
       disk.position.set(tipX, k ? 0.62 : -0.1, tipZ);

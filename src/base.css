@@ -103,6 +103,8 @@
 
 /* ============ Reset / base ============ */
 *, *::before, *::after { box-sizing: border-box; }
+/* display を持つ部品が hidden 属性に勝ってしまうのを防ぐ */
+[hidden] { display: none !important; }
 html {
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;

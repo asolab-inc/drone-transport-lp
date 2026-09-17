@@ -289,3 +289,21 @@
   .s-hero__hud { padding: 9px 10px 8px; }
   .s-hero__hud-note { max-width: 132px; }
 }
+
+/* SPでは吊り荷が見出しに重なって読めなくなるため、3Dを画面上部に収め、
+   テキストはその下の暗い面に置く（重なりを構造的に無くす） */
+@media (max-width: 767px) {
+  .s-hero {
+    align-items: flex-start;
+    padding-block: calc(43svh + 12px) 40px;
+  }
+  .s-hero__stage {
+    inset: 0 0 auto;
+    height: 47svh;
+  }
+  .s-hero__scrim {
+    background:
+      linear-gradient(180deg, rgba(5, 13, 26, .55) 0%, rgba(5, 13, 26, .04) 20%, rgba(5, 13, 26, .10) 52%, rgba(5, 13, 26, .78) 84%, rgba(5, 13, 26, 1) 100%);
+  }
+  .s-hero__grain { background: none; }
+}

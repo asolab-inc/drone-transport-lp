@@ -67,7 +67,7 @@
 .s-contact__check input { width: 18px; height: 18px; accent-color: var(--blue-500); flex: none; }
 .s-contact__check:has(input:checked) { border-color: var(--blue-400); background: rgba(95,168,255,.14); }
 
-.s-contact__privacy { display: flex; align-items: flex-start; gap: 12px; font-size: var(--fs-sm); line-height: 1.7; color: var(--text-2); cursor: pointer; }
+.s-contact__privacy { display: flex; align-items: center; flex-wrap: wrap; gap: 10px; font-size: var(--fs-sm); line-height: 1.7; color: var(--text-2); cursor: pointer; }
 .s-contact__privacy input { width: 20px; height: 20px; margin-top: 2px; accent-color: var(--blue-500); flex: none; }
 .s-contact__privacy a { color: var(--blue-300); text-decoration: underline; text-underline-offset: 3px; }
 .s-contact__privacy .s-contact__req { margin-left: 8px; }
