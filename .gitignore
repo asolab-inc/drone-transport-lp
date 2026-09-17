@@ -3,3 +3,7 @@ Thumbs.db
 desktop.ini
 *.log
 .env*
+tools/node_modules/
+preview/
+preview-*.html
+review/

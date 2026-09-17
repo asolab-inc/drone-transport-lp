@@ -1,0 +1,211 @@
+/* ============ 04-data ============ */
+.s-data__grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(18px, 2vw, 24px);
+  margin-bottom: clamp(18px, 2vw, 24px);
+}
+
+.s-data__card {
+  display: flex;
+  flex-direction: column;
+}
+
+.s-data__h3 {
+  margin-top: var(--s-2);
+  font-size: var(--fs-h4);
+  color: var(--text);
+}
+
+.s-data__sub {
+  margin-top: 2px;
+}
+
+.s-data__big {
+  display: flex;
+  align-items: baseline;
+  gap: .1em;
+  margin-top: var(--s-4);
+  color: var(--accent-text);
+}
+.s-data__big .num { font-size: clamp(2.6rem, 2vw + 2.1rem, 3.4rem); }
+.s-data__big .unit { font-size: var(--fs-md); color: var(--text-2); }
+
+.s-data__chart {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-5);
+  margin-top: var(--s-6);
+}
+
+.s-data__group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-2);
+}
+
+.s-data__glabel {
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  color: var(--text-2);
+  letter-spacing: .01em;
+}
+
+.s-data__row {
+  display: grid;
+  grid-template-columns: 3.6em 1fr 4.4em;
+  align-items: center;
+  gap: var(--s-3);
+}
+
+.s-data__key {
+  font-size: var(--fs-xs);
+  color: var(--text-2);
+}
+.s-data__row--ref .s-data__key { color: var(--text-3); }
+
+.s-data__track {
+  position: relative;
+  height: 9px;
+  border-radius: var(--r-pill);
+  background: var(--bg-mist);
+  overflow: hidden;
+}
+.s-data__fill {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 0;
+  border-radius: var(--r-pill);
+  background: var(--accent);
+  transition: width 1.1s var(--ease);
+}
+.s-data__fill.is-in { width: var(--w); }
+.s-data__fill--ref { background: color-mix(in srgb, var(--accent) 26%, var(--bg-mist)); }
+
+.s-data__val {
+  display: flex;
+  align-items: baseline;
+  justify-content: flex-end;
+  gap: .06em;
+  font-family: var(--font-num);
+}
+.s-data__val .num {
+  font-size: var(--fs-md);
+  font-weight: 700;
+  color: var(--text);
+}
+.s-data__val .unit { font-size: .62em; color: var(--text-3); }
+.s-data__row--ref .s-data__val .num { color: var(--text-3); font-weight: 600; }
+
+.s-data__card > .source { margin-top: var(--s-6); }
+
+/* ---- Hakuba card ---- */
+.s-data__hakuba {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-6);
+}
+
+.s-data__hhead { max-width: 46em; }
+
+.s-data__hbody {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: clamp(24px, 3vw, 48px);
+}
+
+.s-data__hcompare {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(16px, 2.4vw, 32px);
+}
+
+.s-data__htime { text-align: center; }
+.s-data__htime-label {
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  color: var(--text-2);
+  margin-bottom: var(--s-2);
+}
+.s-data__htime-val {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: .1em;
+  color: var(--text-3);
+}
+.s-data__htime--drone .s-data__htime-val { color: var(--accent-text); }
+.s-data__approx { font-size: var(--fs-sm); color: inherit; opacity: .75; }
+.s-data__htime-val .num { font-size: clamp(2.4rem, 1.6vw + 2rem, 3rem); }
+.s-data__htime-val .unit { font-size: var(--fs-md); }
+
+.s-data__harrow { flex: none; color: var(--line-2); }
+.s-data__harrow svg { width: 32px; height: 16px; }
+.s-data__harrow path { fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+.s-data__conditions {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--s-6);
+  padding-left: clamp(24px, 3vw, 48px);
+  border-left: 1px solid var(--line);
+}
+.s-data__conditions dt {
+  font-size: var(--fs-2xs);
+  font-weight: 700;
+  letter-spacing: .04em;
+  color: var(--text-3);
+  margin-bottom: 4px;
+}
+.s-data__conditions dd {
+  font-family: var(--font-num);
+  font-size: var(--fs-sm);
+  font-weight: 700;
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.s-data__caution {
+  font-size: var(--fs-sm);
+  line-height: 1.75;
+  color: var(--text-2);
+  background: var(--bg-mist);
+  border-radius: var(--r);
+  padding: var(--s-4) var(--s-5);
+}
+
+/* The time-compare + conditions row needs more breathing room than the
+   card grid, so it stacks earlier (covers tablet portrait too). */
+@media (max-width: 960px) {
+  .s-data__hbody {
+    grid-template-columns: 1fr;
+    gap: var(--s-6);
+  }
+  .s-data__conditions {
+    grid-template-columns: 1fr;
+    padding-left: 0;
+    border-left: 0;
+    padding-top: var(--s-5);
+    border-top: 1px solid var(--line);
+    gap: var(--s-3);
+  }
+  .s-data__conditions > div {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--s-4);
+  }
+  .s-data__conditions dt { margin-bottom: 0; }
+}
+
+@media (max-width: 767px) {
+  .s-data__grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 420px) {
+  .s-data__hcompare { gap: var(--s-3); }
+  .s-data__harrow svg { width: 22px; height: 12px; }
+}

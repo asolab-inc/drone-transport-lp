@@ -1,0 +1,24 @@
+.s-company__top { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, .8fr); gap: clamp(28px, 3.5vw, 56px); align-items: start; }
+@media (max-width: 899px) { .s-company__top { grid-template-columns: minmax(0, 1fr); } }
+
+.s-company__strengths { display: grid; gap: 2px; }
+.s-company__strength { padding: 22px 0; border-bottom: 1px solid var(--line); }
+.s-company__strength:first-child { padding-top: 0; }
+.s-company__strength-title { position: relative; font-size: var(--fs-h4); margin-bottom: 10px; padding-left: 18px; }
+.s-company__strength-title::before { content: ""; position: absolute; left: 0; top: .48em; width: 6px; height: 6px; border-radius: 50%; background: var(--blue-600); }
+.s-company__strength p { font-size: var(--fs-sm); line-height: 1.95; color: var(--text-2); padding-left: 18px; }
+.s-company__photo img { object-position: center 55%; }
+
+.s-company__profile { margin-top: clamp(48px, 5vw, 72px); }
+.s-company__profile-title { font-size: var(--fs-h4); margin-bottom: 20px; }
+.s-company__table { border-top: 1px solid var(--line-2); }
+.s-company__table > div { display: grid; grid-template-columns: 180px minmax(0, 1fr); gap: 24px; padding: 18px 4px; border-bottom: 1px solid var(--line); }
+.s-company__table dt { font-size: var(--fs-sm); font-weight: 700; color: var(--text-3); letter-spacing: .03em; }
+.s-company__table dd { margin: 0; font-size: var(--fs-sm); line-height: 1.9; color: var(--text); }
+.s-company__table a { color: var(--blue-700); text-decoration: underline; text-underline-offset: 3px; }
+@media (max-width: 639px) {
+  .s-company__table > div { grid-template-columns: minmax(0, 1fr); gap: 6px; padding: 16px 2px; }
+}
+.s-company__link { display: inline-flex; align-items: center; gap: 8px; margin-top: 24px; font-size: var(--fs-sm); font-weight: 700; color: var(--blue-700); }
+.s-company__link::after { content: ""; width: 7px; height: 7px; border-top: 2px solid currentColor; border-right: 2px solid currentColor; transform: rotate(45deg); transition: transform var(--dur) var(--ease); }
+.s-company__link:hover::after { transform: translateX(3px) rotate(45deg); }

@@ -1,0 +1,14 @@
+{
+  "name": "drone-transport-lp-tools",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node build.mjs",
+    "shoot": "node shoot.mjs"
+  },
+  "dependencies": {
+    "esbuild": "^0.28.2",
+    "playwright-core": "^1.63.0",
+    "three": "^0.186.0"
+  }
+}

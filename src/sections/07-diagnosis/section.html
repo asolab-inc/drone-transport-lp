@@ -1,0 +1,83 @@
+<section id="diagnosis" class="section section--mist s-diagnosis" data-section="07-diagnosis" data-theme="light" aria-labelledby="diagnosis-title">
+  <div class="container container--narrow">
+
+    <header class="sec-head sec-head--center" data-reveal>
+      <p class="sec-head__eyebrow"><span class="sec-head__num">05</span><span>CHECK</span></p>
+      <h2 class="sec-head__title" id="diagnosis-title">この現場、ドローン輸送の候補になりますか。</h2>
+      <p class="sec-head__lede">4つの質問に答えると、目安を表示します。わからない項目があっても構いません。</p>
+    </header>
+
+    <div class="card s-diagnosis__panel" data-reveal="fade" style="--i:1">
+
+      <div class="s-diagnosis__progress">
+        <div class="s-diagnosis__progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="4" aria-valuenow="0" aria-label="回答の進捗">
+          <span class="s-diagnosis__progress-fill" data-progress-fill></span>
+        </div>
+        <p class="s-diagnosis__progress-text"><span data-progress-count>0</span><span class="s-diagnosis__progress-total"> / 4 項目に回答</span></p>
+      </div>
+
+      <div class="s-diagnosis__grid">
+
+        <div class="s-diagnosis__q" data-reveal style="--i:1">
+          <fieldset class="s-diagnosis__fieldset" data-qtext="目的地まで車両で">
+            <legend class="s-diagnosis__legend"><span class="s-diagnosis__qnum">Q1</span>目的地まで車両で入れますか？</legend>
+            <div class="s-diagnosis__opts">
+              <label class="s-diagnosis__opt"><input type="radio" name="d1" value="2" data-label="入れない"><span>入れない</span></label>
+              <label class="s-diagnosis__opt"><input type="radio" name="d1" value="1" data-label="途中まで"><span>途中まで</span></label>
+              <label class="s-diagnosis__opt"><input type="radio" name="d1" value="0" data-label="入れる"><span>入れる</span></label>
+            </div>
+          </fieldset>
+        </div>
+
+        <div class="s-diagnosis__q" data-reveal style="--i:2">
+          <fieldset class="s-diagnosis__fieldset" data-qtext="荷物の分割">
+            <legend class="s-diagnosis__legend"><span class="s-diagnosis__qnum">Q2</span>荷物は複数回に分けて運べますか？</legend>
+            <div class="s-diagnosis__opts">
+              <label class="s-diagnosis__opt"><input type="radio" name="d2" value="2" data-label="分けられる"><span>分けられる</span></label>
+              <label class="s-diagnosis__opt"><input type="radio" name="d2" value="-2" data-label="一括で運びたい"><span>一括で運びたい</span></label>
+              <label class="s-diagnosis__opt"><input type="radio" name="d2" value="0" data-unknown="1" data-label="まだ未定"><span>まだ未定</span></label>
+            </div>
+          </fieldset>
+        </div>
+
+        <div class="s-diagnosis__q" data-reveal style="--i:3">
+          <fieldset class="s-diagnosis__fieldset" data-qtext="人力の負担">
+            <legend class="s-diagnosis__legend"><span class="s-diagnosis__qnum">Q3</span>人力で運ぶと負担が大きいですか？</legend>
+            <div class="s-diagnosis__opts">
+              <label class="s-diagnosis__opt"><input type="radio" name="d3" value="1" data-label="大きい"><span>大きい</span></label>
+              <label class="s-diagnosis__opt"><input type="radio" name="d3" value="0" data-label="それほどでもない"><span>それほどでもない</span></label>
+              <label class="s-diagnosis__opt"><input type="radio" name="d3" value="0" data-unknown="1" data-label="わからない"><span>わからない</span></label>
+            </div>
+          </fieldset>
+        </div>
+
+        <div class="s-diagnosis__q" data-reveal style="--i:4">
+          <fieldset class="s-diagnosis__fieldset" data-qtext="荷物の総量">
+            <legend class="s-diagnosis__legend"><span class="s-diagnosis__qnum">Q4</span>荷物の総量は？</legend>
+            <div class="s-diagnosis__opts">
+              <label class="s-diagnosis__opt"><input type="radio" name="d4" value="2" data-label="小〜中量"><span>小〜中量</span></label>
+              <label class="s-diagnosis__opt"><input type="radio" name="d4" value="-2" data-label="大量・大重量"><span>大量・大重量</span></label>
+              <label class="s-diagnosis__opt"><input type="radio" name="d4" value="0" data-unknown="1" data-label="まだ未定"><span>まだ未定</span></label>
+            </div>
+          </fieldset>
+        </div>
+
+      </div>
+
+      <div class="s-diagnosis__action">
+        <button type="button" class="btn btn--ghost btn--sm s-diagnosis__btn" data-diag-button>診断結果を見る</button>
+        <p class="note s-diagnosis__note">※最終的な輸送可否は、重量・距離・飛行経路・安全条件を確認して判断します。</p>
+      </div>
+
+      <div class="s-diagnosis__result" data-result hidden aria-live="polite" aria-atomic="true">
+        <p class="s-diagnosis__result-title" data-result-title></p>
+        <p class="s-diagnosis__result-body" data-result-body></p>
+        <div class="s-diagnosis__result-cta" data-result-cta hidden>
+          <a class="btn btn--primary" href="#contact" data-diag-cta>この条件で相談する</a>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</section>

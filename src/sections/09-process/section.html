@@ -1,0 +1,85 @@
+<section id="process" class="section section--dark s-process" data-section="09-process" data-theme="dark">
+  <div class="container">
+    <div class="sec-head" data-reveal>
+      <p class="sec-head__eyebrow"><span class="sec-head__num">07</span><span>Workflow</span></p>
+      <h2 class="sec-head__title">運搬を、現場作業から切り離す。</h2>
+      <p class="sec-head__lede">運ぶ工程をドローンに任せると、現場の人が動く回数が変わります。作業員は荷積みと荷受けだけを担い、残りの時間を本来の作業に使えます。</p>
+    </div>
+
+    <div class="s-process__ba">
+      <article class="s-process__col s-process__col--before" data-reveal>
+        <p class="s-process__tag">これまで</p>
+        <h3 class="s-process__title">作業員が荷物を持って往復する</h3>
+        <div class="s-process__figure" role="img" aria-label="作業員が積込地点と目的地の間を、荷物を分けて何度も往復する様子の図">
+          <svg viewBox="0 0 320 120" aria-hidden="true">
+            <path d="M12 96 C 80 96, 110 40, 175 34 S 268 30, 308 26" fill="none" stroke="rgba(255,255,255,.22)" stroke-width="2"/>
+            <g fill="none" stroke="#8497b0" stroke-width="1.6" stroke-linecap="round">
+              <path d="M40 84 v-9 M40 75 l-5 6 M40 75 l5 6 M40 75 l-6 -5 M40 75 l6 -5"/>
+              <path d="M110 62 v-9 M110 53 l-5 6 M110 53 l5 6 M110 53 l-6 -5 M110 53 l6 -5"/>
+              <path d="M186 44 v-9 M186 35 l-5 6 M186 35 l5 6 M186 35 l-6 -5 M186 35 l6 -5"/>
+            </g>
+            <circle cx="40" cy="68" r="3.4" fill="#8497b0"/><circle cx="110" cy="46" r="3.4" fill="#8497b0"/><circle cx="186" cy="28" r="3.4" fill="#8497b0"/>
+            <g stroke="#8497b0" stroke-width="1.4" fill="none" stroke-dasharray="3 4">
+              <path d="M48 92 C 80 88, 84 70, 104 66"/>
+              <path d="M118 70 C 148 66, 156 50, 180 48"/>
+            </g>
+            <text x="12" y="112" font-size="9" fill="#66758a">積込地点</text>
+            <text x="268" y="112" font-size="9" fill="#66758a">目的地</text>
+          </svg>
+        </div>
+        <ul class="s-process__list">
+          <li>荷物を持てる重さに分ける</li>
+          <li>山道・斜面を歩いて運ぶ</li>
+          <li>戻る。もう一度運ぶ</li>
+          <li>運搬だけに時間と体力を使う</li>
+        </ul>
+      </article>
+
+      <div class="s-process__arrow" aria-hidden="true">
+        <svg viewBox="0 0 40 40"><path d="M8 20h22M22 12l9 8-9 8" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+
+      <article class="s-process__col s-process__col--after" data-reveal style="--i:1">
+        <p class="s-process__tag s-process__tag--accent">ドローン輸送</p>
+        <h3 class="s-process__title">荷物だけが、空を通る</h3>
+        <figure class="ph ph--16x9 s-process__photo">
+          <img src="images/loading-01.jpg" srcset="images/sm/loading-01.jpg 960w, images/loading-01.jpg 1800w" sizes="(max-width: 899px) 100vw, 44vw" alt="荷物のバッグを機体に掛ける2人の作業員" width="1800" height="1350" loading="lazy" decoding="async">
+          <figcaption class="ph__cap">荷掛けの作業（2026年6月）</figcaption>
+        </figure>
+        <ul class="s-process__list s-process__list--accent">
+          <li>荷物を機体に掛ける</li>
+          <li>飛行はドローンが担う</li>
+          <li>目的地で荷物を受け取る</li>
+          <li>作業員は本来の現場作業へ</li>
+        </ul>
+      </article>
+    </div>
+
+    <ol class="s-process__steps" data-reveal>
+      <li><span class="s-process__step-no num">01</span><b>荷掛け</b><span>重心と固定を確認して吊る</span></li>
+      <li><span class="s-process__step-no num">02</span><b>飛行</b><span>計画したルートを飛ぶ</span></li>
+      <li><span class="s-process__step-no num">03</span><b>荷受け</b><span>着陸、または吊り下げたまま降ろす</span></li>
+    </ol>
+
+    <figure class="s-process__video" data-reveal>
+      <div class="s-process__player" data-player>
+        <video
+          data-video
+          poster="images/video-poster.jpg"
+          preload="none"
+          muted
+          playsinline
+          loop
+          width="1920" height="1080"
+          aria-label="荷物を吊り下げて山の上空を飛行する映像">
+          <source src="video/transport-flight.mp4" type="video/mp4">
+        </video>
+        <button class="s-process__play" type="button" data-play aria-label="映像を再生する">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z" fill="currentColor"/></svg>
+          <span>映像を再生</span>
+        </button>
+      </div>
+      <figcaption class="s-process__video-cap">吊り下げ輸送の飛行映像</figcaption>
+    </figure>
+  </div>
+</section>
