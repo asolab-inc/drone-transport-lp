@@ -8,7 +8,7 @@ import {
   DirectionalLight, DoubleSide, Euler, Fog, Group, HemisphereLight, LatheGeometry, MathUtils,
   Mesh, MeshBasicMaterial, MeshLambertMaterial, MeshStandardMaterial, PerspectiveCamera,
   PlaneGeometry, Quaternion, RepeatWrapping, RingGeometry, Scene, SphereGeometry, SRGBColorSpace,
-  Vector3, WebGLRenderer,
+  TorusGeometry, Vector3, WebGLRenderer,
 } from 'three';
 
 const clamp = MathUtils.clamp;
@@ -113,6 +113,42 @@ function glowTexture() {
   t.colorSpace = SRGBColorSpace;
   return t;
 }
+/* フレコンバッグの布：織り目・汚れ・縫い目をプロシージャルに生成 */
+function fabricTexture() {
+  const c = document.createElement('canvas');
+  c.width = c.height = 256;
+  const g = c.getContext('2d');
+  g.fillStyle = '#c9a468';
+  g.fillRect(0, 0, 256, 256);
+  for (let y = 0; y < 256; y += 3) {
+    g.fillStyle = y % 6 === 0 ? 'rgba(255,255,255,.10)' : 'rgba(90,60,25,.10)';
+    g.fillRect(0, y, 256, 1.5);
+  }
+  for (let x = 0; x < 256; x += 3) {
+    g.fillStyle = x % 6 === 0 ? 'rgba(255,255,255,.07)' : 'rgba(90,60,25,.08)';
+    g.fillRect(x, 0, 1.5, 256);
+  }
+  for (let i = 0; i < 220; i++) {
+    const r = 6 + Math.random() * 26;
+    const rr = 120 + (Math.random() * 60 | 0);
+    const gg = 88 + (Math.random() * 40 | 0);
+    g.fillStyle = 'rgba(' + rr + ',' + gg + ',40,' + (0.02 + Math.random() * 0.05).toFixed(3) + ')';
+    g.beginPath();
+    g.arc(Math.random() * 256, Math.random() * 256, r, 0, Math.PI * 2);
+    g.fill();
+  }
+  g.strokeStyle = 'rgba(70,48,20,.3)';
+  g.lineWidth = 2;
+  g.setLineDash([5, 4]);
+  for (const x of [40, 216]) { g.beginPath(); g.moveTo(x, 0); g.lineTo(x, 256); g.stroke(); }
+  const t = new CanvasTexture(c);
+  t.wrapS = t.wrapT = RepeatWrapping;
+  t.repeat.set(2.4, 1.6);
+  t.colorSpace = SRGBColorSpace;
+  t.anisotropy = 4;
+  return t;
+}
+
 function dashTexture() {
   const w = 64, h = 8, cv = document.createElement('canvas');
   cv.width = w; cv.height = h;
@@ -173,7 +209,7 @@ function boot(root) {
 
   renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, dprCap));
   renderer.toneMapping = ACESFilmicToneMapping;
-  renderer.toneMappingExposure = 1.16;
+  renderer.toneMappingExposure = 1.30;
 
   /* ---------- scene ---------- */
   const HORIZON = 0x5e89b0;
@@ -213,7 +249,7 @@ function boot(root) {
   const bounce = new DirectionalLight(0x8ab8ff, 0.5);
   bounce.position.set(0.6, 0.3, 0.74).multiplyScalar(900);
   scene.add(bounce);
-  scene.add(new HemisphereLight(0xc7e2ff, 0x243a22, 1.55));
+  scene.add(new HemisphereLight(0xc7e2ff, 0x2c4529, 1.75));
 
   /* ---------- terrain ---------- */
   const terrGeo = new PlaneGeometry(SIZE, SIZE, SEG, SEG);
@@ -262,15 +298,27 @@ function boot(root) {
       '#include <color_fragment>',
       `#include <color_fragment>
       float camD = length(vWP - cameraPosition);
-      float nearK = 1.0 - smoothstep(80.0, 640.0, camD);
-      float canopy = sin(vWP.x * 0.58) * sin(vWP.z * 0.67)
-                   + 0.55 * sin(vWP.x * 1.37 + 1.7) * sin(vWP.z * 1.19 - 0.9);
-      float green = clamp(diffuseColor.g * 2.2 - diffuseColor.r - diffuseColor.b + 0.16, 0.0, 1.0);
-      diffuseColor.rgb *= 1.0 + canopy * 0.09 * nearK * green;
+      float nearK = 1.0 - smoothstep(90.0, 1000.0, camD);
+      /* 面法線から斜度を求める（急斜面は岩肌、緩斜面は杉林） */
+      vec3 fn = normalize(cross(dFdx(vWP), dFdy(vWP)));
+      float slope = 1.0 - clamp(abs(fn.y), 0.0, 1.0);
+      float forest = 1.0 - smoothstep(0.40, 0.70, slope);
+      /* 樹冠のざらつき：複数周波数を重ねて針葉樹林の粒状感を出す */
+      float c1 = sin(vWP.x * 1.90) * sin(vWP.z * 2.10);
+      float c2 = sin(vWP.x * 4.70 + 1.3) * sin(vWP.z * 4.10 - 0.7);
+      float c3 = sin(vWP.x * 9.30 - 2.1) * sin(vWP.z * 8.70 + 0.5);
+      float canopy = c1 * 0.55 + c2 * 0.30 + c3 * 0.15;
+      diffuseColor.rgb *= 1.0 + canopy * 0.20 * nearK * forest;
+      /* 林床の色ムラ */
+      diffuseColor.rgb *= 1.0 + sin(vWP.x * 0.21 + 2.0) * sin(vWP.z * 0.18) * 0.06;
+      /* 露出した岩肌・土 */
+      vec3 rock = vec3(0.35, 0.31, 0.27);
+      diffuseColor.rgb = mix(diffuseColor.rgb, rock, smoothstep(0.46, 0.86, slope) * 0.62 * (0.35 + 0.65 * nearK));
+      /* 等高線（測量会社らしさ） */
       float cf = vWP.y / 24.0;
       float cg = abs(fract(cf - 0.5) - 0.5) / max(fwidth(cf), 1e-5);
-      float cline = (1.0 - clamp(cg, 0.0, 1.0)) * (1.0 - smoothstep(240.0, 1400.0, camD));
-      diffuseColor.rgb += cline * 0.05 * vec3(0.42, 0.66, 1.0);`
+      float cline = (1.0 - clamp(cg, 0.0, 1.0)) * (1.0 - smoothstep(280.0, 1500.0, camD));
+      diffuseColor.rgb += cline * 0.075 * vec3(0.42, 0.66, 1.0);`
     );
   };
   terrMat.customProgramCacheKey = () => 'aso-hero-terrain';
@@ -466,11 +514,12 @@ function boot(root) {
   const segs = [];
   for (let i = 0; i < NP - 1; i++) { const m = new Mesh(segGeo, cableMat); scene.add(m); segs.push(m); }
 
-  const BAG = 1.95;
+  /* フレコンバッグ：実機（FlyCart 30）に対して過大にならない寸法にする */
+  const BAG = 1.02;
   const bagGeo = new LatheGeometry([
-    [0.03, -1.02], [0.16, -0.92], [0.34, -0.74], [0.5, -0.46], [0.6, -0.12],
-    [0.61, 0.16], [0.55, 0.42], [0.42, 0.62], [0.26, 0.76], [0.12, 0.85], [0.0, 0.9],
-  ].map(([x, y]) => new Vector3(x * BAG, y * BAG, 0)), 22);
+    [0.10, -1.00], [0.42, -0.97], [0.66, -0.86], [0.80, -0.62], [0.86, -0.28],
+    [0.87, 0.06], [0.84, 0.34], [0.74, 0.56], [0.56, 0.72], [0.34, 0.82], [0.17, 0.90], [0.0, 0.94],
+  ].map(([x, y]) => new Vector3(x * BAG * 1.35, y * BAG * 1.5, 0)), 28);
   {
     const p = bagGeo.attributes.position;
     for (let i = 0; i < p.count; i++) {
@@ -478,18 +527,47 @@ function boot(root) {
       const r = Math.hypot(x, z);
       if (r > 0.02) {
         const ang = Math.atan2(z, x);
-        const f = 1 + 0.055 * Math.sin(ang * 5 + y * 2.1) + 0.035 * Math.sin(ang * 9 - y * 1.3);
+        /* 詰め物のふくらみと布のたるみ */
+        const f = 1
+          + 0.045 * Math.sin(ang * 4 + y * 1.6)
+          + 0.022 * Math.sin(ang * 9 - y * 2.4)
+          + 0.014 * Math.sin(ang * 15 + y * 3.1);
         p.setX(i, x * f); p.setZ(i, z * f);
       }
     }
     bagGeo.computeVertexNormals();
-    bagGeo.translate(0, -0.9 * BAG, 0);
+    bagGeo.translate(0, -0.86 * BAG * 1.5, 0);
   }
-  const bag = new Mesh(bagGeo, new MeshStandardMaterial({ color: 0xd79b3c, roughness: 0.93, metalness: 0 }));
+  const bagTex = fabricTexture();
+  const bag = new Mesh(bagGeo, new MeshStandardMaterial({
+    map: bagTex, color: 0xe4b871, roughness: 0.95, metalness: 0,
+  }));
   scene.add(bag);
-  const knot = new Mesh(new CylinderGeometry(0.2, 0.32, 0.36, 12), new MeshStandardMaterial({ color: 0xb8842f, roughness: 0.85 }));
-  knot.position.y = -0.22;
-  bag.add(knot);
+
+  /* 吊り上げベルト：バッグ上部からフックへ4本 */
+  {
+    const strapMat = new MeshStandardMaterial({ color: 0xcfd6dd, roughness: 0.8, metalness: 0.02, side: DoubleSide });
+    const topY = 0.1 * BAG * 1.5;
+    const hookY = topY + 0.92;
+    for (let i = 0; i < 4; i++) {
+      const a = (i / 4) * Math.PI * 2 + Math.PI / 4;
+      const rx = Math.cos(a) * 0.62 * BAG * 1.35, rz = Math.sin(a) * 0.62 * BAG * 1.35;
+      const from = new Vector3(rx, topY - 0.34, rz);
+      const to = new Vector3(0, hookY, 0);
+      const len = from.distanceTo(to);
+      const strap = new Mesh(new PlaneGeometry(0.1, len), strapMat);
+      strap.position.copy(from).lerp(to, 0.5);
+      strap.lookAt(strap.position.clone().add(new Vector3(0, 0, 1)));
+      const dir = to.clone().sub(from).normalize();
+      strap.quaternion.setFromUnitVectors(new Vector3(0, 1, 0), dir);
+      strap.rotateY(a);
+      bag.add(strap);
+    }
+    const ring = new Mesh(new TorusGeometry(0.15, 0.045, 8, 18), new MeshStandardMaterial({ color: 0x9aa6b4, roughness: 0.5, metalness: 0.7 }));
+    ring.position.y = hookY;
+    ring.rotation.x = Math.PI / 2;
+    bag.add(ring);
+  }
 
   /* ---------- state ---------- */
   const st = {

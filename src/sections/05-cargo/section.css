@@ -293,5 +293,6 @@
 
 @media (max-width: 559px) {
   .s-cargo__cta { flex-direction: column; align-items: stretch; text-align: center; }
+  .s-cargo__cta-text { flex: 0 0 auto; }
   .s-cargo__cta .btn { justify-content: center; }
 }

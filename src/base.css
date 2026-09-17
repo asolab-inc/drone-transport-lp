@@ -119,6 +119,7 @@ h1, h2, h3, h4, p, li, dt, dd, figcaption, summary, td, th, label { word-break: 
 p { margin: 0; text-wrap: pretty; }
 ul, ol { margin: 0; padding: 0; list-style: none; }
 img, video, svg, canvas, picture { display: block; max-width: 100%; }
+figure, blockquote, dl, dd { margin: 0; }
 img { height: auto; }
 a { color: inherit; text-decoration: none; }
 button, input, select, textarea { font: inherit; color: inherit; }
@@ -341,4 +342,5 @@ html.menu-open .site-header { background: transparent; box-shadow: none; color: 
   .m-cta__main { flex: 1; --btn-h: 50px; padding: 0 16px; font-size: .875rem; }
 }
 html.is-shot-sections .site-header,
+html.is-shot-sections .skip-link,
 html.is-shot-sections .m-cta { display: none !important; }
