@@ -82,6 +82,7 @@ if (root) {
     titleEl.textContent = '4項目すべて選んでください。';
     bodyEl.textContent = '分からない項目は「まだ未定」「わからない」を選べます。';
     ctaWrap.hidden = true;
+    if (button) button.hidden = false;
     message = '';
     reveal();
   }
@@ -92,11 +93,13 @@ if (root) {
     titleEl.textContent = title;
     bodyEl.textContent = body;
     ctaWrap.hidden = false;
+    if (button) button.hidden = true;
     message = buildMessage(selected, title);
     reveal();
   }
 
   function hideResult() {
+    if (button) button.hidden = false;
     resultEl.hidden = true;
     resultEl.classList.remove('is-in');
     message = '';

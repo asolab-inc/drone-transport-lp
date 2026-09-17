@@ -41,3 +41,9 @@
 .s-process__play:hover svg { transform: scale(1.06); background: rgba(255,255,255,.24); }
 .s-process__player.is-playing .s-process__play { opacity: 0; pointer-events: none; }
 .s-process__video-cap { margin-top: 14px; font-size: var(--fs-xs); color: var(--text-3); }
+
+/* SPでは16:9だと機体が小さくなりすぎるので、縦を伸ばして被写体に寄せる */
+@media (max-width: 767px) {
+  .s-process__player { aspect-ratio: 4 / 3; }
+  .s-process__player video { object-position: 47% 34%; }
+}

@@ -76,6 +76,15 @@
   --dur: .2s;
 }
 
+/* スマホは本文・注記を一段大きくする（現場担当者がスマホで読むため） */
+@media (max-width: 767px) {
+  :root {
+    --fs-2xs: .75rem;   /* 11px -> 12px */
+    --fs-xs: .8125rem;  /* 12px -> 13px */
+    --fs-sm: .9375rem;  /* 14px -> 15px */
+  }
+}
+
 /* Dark surfaces swap the semantic tokens so every component adapts */
 .section--dark,
 .section--deep,

@@ -90,7 +90,7 @@
 .s-contact__sources-list { display: grid; gap: 7px; counter-reset: src; max-width: 1000px; }
 .s-contact__sources-list li { position: relative; padding-left: 26px; font-size: var(--fs-2xs); line-height: 1.75; color: var(--text-3); }
 .s-contact__sources-list li::before { counter-increment: src; content: counter(src) "."; position: absolute; left: 0; font-family: var(--font-num); font-weight: 600; color: var(--text-3); }
-.s-contact__sources-list a { margin-left: 8px; color: var(--blue-300); text-decoration: underline; text-underline-offset: 2px; word-break: break-all; }
+.s-contact__sources-list a { margin-left: 8px; color: var(--blue-300); text-decoration: underline; text-underline-offset: 2px; word-break: normal; overflow-wrap: anywhere; }
 
 /* --- footer --- */
 .site-footer { background: #030a14; color: var(--text-2); padding: 40px 0 calc(40px + env(safe-area-inset-bottom)); border-top: 1px solid rgba(255,255,255,.08); }

@@ -52,3 +52,6 @@
 .s-cases__tl-name { display: block; font-size: var(--fs-base); font-weight: 700; line-height: 1.5; }
 .s-cases__tl-name em { display: block; margin-top: 6px; font-style: normal; font-size: var(--fs-2xs); font-weight: 700; letter-spacing: .04em; color: var(--blue-700); }
 .s-cases__agreements .source { margin-top: 18px; }
+
+/* 縦位置の写真は4:3枠で機体が切れるため、上寄りにトリミングする */
+.s-cases__card-media--portrait img { object-position: center 22%; }

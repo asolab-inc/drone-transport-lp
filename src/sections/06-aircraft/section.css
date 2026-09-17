@@ -80,11 +80,11 @@
   padding: clamp(20px, 2.4vw, 28px) clamp(16px, 2vw, 24px);
 }
 .s-aircraft__spec-label {
-  font-family: var(--font-mono);
-  font-size: var(--fs-2xs);
-  font-weight: 600;
-  letter-spacing: .1em;
-  color: var(--text-3);
+  font-family: var(--font-jp);
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  letter-spacing: .02em;
+  color: var(--text-2);
 }
 .s-aircraft__spec-val {
   margin-top: 10px;
