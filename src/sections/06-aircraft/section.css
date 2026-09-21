@@ -328,3 +328,15 @@
     align-items: stretch;
   }
 }
+
+
+/* 輸送モード図版：ローター・寸法線・樹木・注記 */
+.s-aircraft__mode-fig .ill-rotor { fill: rgba(156, 200, 255, .22); stroke: var(--blue-300); stroke-width: 1.1; }
+.s-aircraft__mode-fig .ill-dim { fill: none; stroke: var(--text-3); stroke-width: 1; }
+.s-aircraft__mode-fig .ill-tree { fill: none; stroke: var(--text-3); stroke-width: 1.2; stroke-linecap: round; stroke-linejoin: round; }
+.s-aircraft__mode-fig .ill-note { fill: var(--text-2); font-size: 11px; font-weight: 700; }
+
+/* 5項目を2列に置くと右下が空くため、最後の1項目を全幅にして穴をなくす */
+@media (min-width: 600px) {
+  .s-aircraft__safety-list li:last-child { grid-column: 1 / -1; }
+}

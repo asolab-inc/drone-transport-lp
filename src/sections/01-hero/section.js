@@ -699,7 +699,7 @@ function boot(root) {
     camera.updateMatrixWorld();
     const halfH = Math.tan((camera.fov * Math.PI) / 360) * camera.position.distanceTo(st.pos);
     const fx = wide ? 0.32 : 0.06;
-    const fy = wide ? 0.4 : 0.78;
+    const fy = wide ? 0.4 : 0.16;
     tmpA.setFromMatrixColumn(camera.matrixWorld, 0);
     tmpB.setFromMatrixColumn(camera.matrixWorld, 1);
     tmpV.copy(st.pos).addScaledVector(tmpA, -fx * halfH * aspect).addScaledVector(tmpB, -fy * halfH);

@@ -87,15 +87,30 @@
       <div class="s-aircraft__mode-grid">
         <article class="s-aircraft__mode" data-reveal style="--i:1">
           <div class="s-aircraft__mode-fig">
-            <svg viewBox="0 0 200 140" role="img" aria-label="ウインチのイメージ図。機体から長さ20mのケーブルで荷物を吊り下げ、着陸せずに荷物だけを降ろす">
-              <g class="ill-drone" transform="translate(100 28)">
-                <path d="M-24-10h16M8-10h16M-16-10v6M16-10v6M0 4v10"/>
-                <rect x="-11" y="-4" width="22" height="9" rx="3"/>
+            <svg viewBox="0 0 260 180" role="img" aria-label="ウインチのイメージ図。機体から最大20mのケーブルで荷物を吊り下げ、着陸せずに荷物だけを降ろす">
+              <g class="ill-drone" transform="translate(120 34)">
+                <ellipse class="ill-rotor" cx="-30" cy="-9" rx="17" ry="4"/>
+                <ellipse class="ill-rotor" cx="30" cy="-9" rx="17" ry="4"/>
+                <ellipse class="ill-rotor" cx="-19" cy="3" rx="14" ry="3.4"/>
+                <ellipse class="ill-rotor" cx="19" cy="3" rx="14" ry="3.4"/>
+                <path d="M-30-6v5M30-6v5M-19 6v4M19 6v4"/>
+                <path d="M-28-4h20M8-4h20M-18 5h12M6 5h12"/>
+                <rect x="-13" y="-2" width="26" height="11" rx="3.5"/>
+                <path d="M-9 9v7M9 9v7M-14 16h28"/>
               </g>
-              <path class="ill-cable" d="M100 46V100"/>
-              <text x="112" y="76" class="ill-label">20m</text>
-              <rect class="ill-pkg" x="86" y="100" width="28" height="22" rx="2"/>
-              <path class="ill-ground" d="M16 136 60 126 82 133 112 130 146 137 184 128"/>
+              <path class="ill-cable" d="M120 50V116"/>
+              <g class="ill-dim">
+                <path d="M150 50V116"/>
+                <path d="M146 50h8M146 116h8"/>
+              </g>
+              <text x="158" y="86" class="ill-label">最大20m</text>
+              <path class="ill-pkg" d="M108 116h24l-3 24a9 9 0 0 1-18 0z"/>
+              <path class="ill-ground" d="M10 172 46 160 74 166 104 158 140 168 176 156 212 165 250 154"/>
+              <g class="ill-tree">
+                <path d="M36 160v-12M36 148l-6 8h12z"/>
+                <path d="M196 156v-12M196 144l-6 8h12z"/>
+              </g>
+              <text x="14" y="26" class="ill-note">着陸せずに降ろす</text>
             </svg>
           </div>
           <div class="s-aircraft__mode-body">
@@ -107,14 +122,22 @@
 
         <article class="s-aircraft__mode" data-reveal style="--i:2">
           <div class="s-aircraft__mode-fig">
-            <svg viewBox="0 0 200 140" role="img" aria-label="カーゴのイメージ図。貨物ボックスを機体に固定し、着陸して積み降ろしする">
-              <g class="ill-drone" transform="translate(100 28)">
-                <path d="M-24-10h16M8-10h16M-16-10v6M16-10v6M0 4v10"/>
-                <rect x="-11" y="-4" width="22" height="9" rx="3"/>
+            <svg viewBox="0 0 260 180" role="img" aria-label="カーゴのイメージ図。貨物ボックスを機体に固定し、着陸して積み降ろしする">
+              <g class="ill-drone" transform="translate(120 74)">
+                <ellipse class="ill-rotor" cx="-30" cy="-9" rx="17" ry="4"/>
+                <ellipse class="ill-rotor" cx="30" cy="-9" rx="17" ry="4"/>
+                <ellipse class="ill-rotor" cx="-19" cy="3" rx="14" ry="3.4"/>
+                <ellipse class="ill-rotor" cx="19" cy="3" rx="14" ry="3.4"/>
+                <path d="M-30-6v5M30-6v5M-19 6v4M19 6v4"/>
+                <path d="M-28-4h20M8-4h20M-18 5h12M6 5h12"/>
+                <rect x="-13" y="-2" width="26" height="11" rx="3.5"/>
               </g>
-              <path class="ill-leg" d="M84 44 76 116M116 44 124 116"/>
-              <rect class="ill-pkg" x="82" y="58" width="36" height="26" rx="3"/>
-              <path class="ill-ground" d="M16 118H184"/>
+              <path class="ill-leg" d="M106 83v24M134 83v24"/>
+              <rect class="ill-pkg" x="100" y="86" width="40" height="26" rx="3"/>
+              <path class="ill-ground" d="M28 128h204"/>
+              <g class="ill-dim"><path d="M28 136h204M28 132v8M232 132v8"/></g>
+              <text x="130" y="154" class="ill-label" text-anchor="middle">平坦な離着陸地点が必要</text>
+              <text x="14" y="26" class="ill-note">着陸して積み降ろし</text>
             </svg>
           </div>
           <div class="s-aircraft__mode-body">

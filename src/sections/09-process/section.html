@@ -10,21 +10,38 @@
       <article class="s-process__col s-process__col--before" data-reveal>
         <p class="s-process__tag">これまで</p>
         <h3 class="s-process__title">作業員が荷物を持って往復する</h3>
-        <div class="s-process__figure" role="img" aria-label="作業員が積込地点と目的地の間を、荷物を分けて何度も往復する様子の図">
-          <svg viewBox="0 0 320 120" aria-hidden="true">
-            <path d="M12 96 C 80 96, 110 40, 175 34 S 268 30, 308 26" fill="none" stroke="rgba(255,255,255,.22)" stroke-width="2"/>
-            <g fill="none" stroke="#8497b0" stroke-width="1.6" stroke-linecap="round">
-              <path d="M40 84 v-9 M40 75 l-5 6 M40 75 l5 6 M40 75 l-6 -5 M40 75 l6 -5"/>
-              <path d="M110 62 v-9 M110 53 l-5 6 M110 53 l5 6 M110 53 l-6 -5 M110 53 l6 -5"/>
-              <path d="M186 44 v-9 M186 35 l-5 6 M186 35 l5 6 M186 35 l-6 -5 M186 35 l6 -5"/>
+        <div class="s-process__figure" role="img" aria-label="積込地点から斜面の上の目的地まで、作業員が荷物を分けて3往復する様子の断面図">
+          <svg viewBox="0 0 400 225" aria-hidden="true">
+            <defs>
+              <marker id="pArrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+                <path d="M0 1.5 L9 5 L0 8.5 z" fill="#8497b0"/>
+              </marker>
+            </defs>
+            <!-- 地形断面 -->
+            <path d="M18 196 L120 188 L212 150 L300 104 L382 74" fill="none" stroke="rgba(255,255,255,.30)" stroke-width="2.4" stroke-linejoin="round"/>
+            <path d="M18 196 L120 188 L212 150 L300 104 L382 74 L382 210 L18 210 Z" fill="rgba(255,255,255,.045)"/>
+            <!-- 等高線 -->
+            <g stroke="rgba(255,255,255,.10)" stroke-width="1">
+              <path d="M150 210 L150 172"/><path d="M212 210 L212 150"/><path d="M270 210 L270 120"/><path d="M330 210 L330 92"/>
             </g>
-            <circle cx="40" cy="68" r="3.4" fill="#8497b0"/><circle cx="110" cy="46" r="3.4" fill="#8497b0"/><circle cx="186" cy="28" r="3.4" fill="#8497b0"/>
-            <g stroke="#8497b0" stroke-width="1.4" fill="none" stroke-dasharray="3 4">
-              <path d="M48 92 C 80 88, 84 70, 104 66"/>
-              <path d="M118 70 C 148 66, 156 50, 180 48"/>
+            <!-- 3往復（同じ道を繰り返す） -->
+            <g fill="none" stroke="#8497b0" stroke-width="1.5" stroke-dasharray="4 5" marker-end="url(#pArrow)" opacity=".85">
+              <path d="M52 182 C 130 176, 176 150, 226 132"/>
+              <path d="M52 188 C 140 190, 196 166, 256 122"/>
+              <path d="M52 194 C 150 200, 216 176, 286 110"/>
             </g>
-            <text x="12" y="112" font-size="9" fill="#66758a">積込地点</text>
-            <text x="268" y="112" font-size="9" fill="#66758a">目的地</text>
+            <!-- 作業員（荷物を背負う） -->
+            <g stroke="#cfd9e6" stroke-width="2" fill="none" stroke-linecap="round">
+              <circle cx="44" cy="170" r="5.2" fill="#cfd9e6" stroke="none"/>
+              <path d="M44 176 v13 M44 181 l-7 6 M44 181 l7 6 M44 189 l-6 9 M44 189 l6 9"/>
+              <rect x="49" y="176" width="11" height="10" rx="2" fill="#d6964f" stroke="none"/>
+            </g>
+            <!-- 積込地点・目的地 -->
+            <circle cx="30" cy="196" r="5" fill="none" stroke="#8497b0" stroke-width="2.2"/>
+            <circle cx="330" cy="92" r="5" fill="#8497b0"/>
+            <text x="16" y="216" font-size="10" fill="#8497b0">積込地点</text>
+            <text x="352" y="66" font-size="10" fill="#8497b0" text-anchor="middle">目的地</text>
+            <text x="150" y="122" font-size="11" font-weight="700" fill="#cfd9e6">×3往復</text>
           </svg>
         </div>
         <ul class="s-process__list">

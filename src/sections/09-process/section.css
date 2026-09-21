@@ -7,7 +7,7 @@
 .s-process__tag--accent { border-color: var(--blue-400); color: var(--blue-300); background: rgba(95,168,255,.12); }
 .s-process__title { font-size: var(--fs-h4); margin-bottom: 18px; }
 
-.s-process__figure { aspect-ratio: 16 / 6; margin-bottom: 18px; }
+.s-process__figure { aspect-ratio: 16 / 9; margin-bottom: 18px; border-radius: var(--r-lg); background: rgba(255,255,255,.03); border: 1px solid var(--line); }
 .s-process__figure svg { width: 100%; height: 100%; }
 .s-process__photo { margin-bottom: 18px; }
 .s-process__photo img { object-position: center 55%; }
@@ -26,7 +26,7 @@
 .s-process__steps li { display: flex; align-items: baseline; gap: 12px; padding: 16px 18px; border-radius: var(--r); border: 1px solid var(--line); background: rgba(255,255,255,.03); flex-wrap: wrap; }
 .s-process__step-no { font-size: .8125rem; color: var(--blue-400); }
 .s-process__steps b { font-size: var(--fs-base); font-weight: 700; }
-.s-process__steps span:last-child { font-size: var(--fs-xs); color: var(--text-3); width: 100%; }
+.s-process__steps span:last-child { font-size: var(--fs-sm); color: var(--text-2); width: 100%; }
 
 .s-process__video { margin: clamp(40px, 5vw, 64px) 0 0; }
 .s-process__player { position: relative; aspect-ratio: 16 / 9; border-radius: var(--r-lg); overflow: hidden; background: #000; box-shadow: 0 30px 70px rgba(0,0,0,.45); }
@@ -46,4 +46,9 @@
 @media (max-width: 767px) {
   .s-process__player { aspect-ratio: 4 / 3; }
   .s-process__player video { object-position: 47% 34%; }
+}
+
+/* PCでは全幅16:9だと約700pxになり間延びするため、幅を抑えて約500pxに */
+@media (min-width: 900px) {
+  .s-process__video { max-width: 900px; margin-inline: auto; }
 }
