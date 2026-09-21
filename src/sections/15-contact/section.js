@@ -35,8 +35,14 @@ if (form) {
     submit.disabled = true;
     try {
       const res = await fetch(form.action, { method: 'POST', body: new FormData(form) });
-      const data = await res.json().catch(() => ({ ok: res.ok }));
-      if (!res.ok || !data.ok) throw new Error(data.error || '送信に失敗しました');
+      // 明示的な { ok: true } のJSONだけを成功とみなす。
+      // PHPが実行されず生ファイルが200で返るような場合に、
+      // 届いていないのに「送信しました」と表示してしまうのを防ぐ。
+      let data = null;
+      try { data = await res.json(); } catch (_) { data = null; }
+      if (!res.ok || !data || data.ok !== true) {
+        throw new Error((data && data.error) || '送信に失敗しました');
+      }
       form.hidden = true;
       done.hidden = false;
       done.scrollIntoView({ behavior: window.ASO?.reducedMotion ? 'auto' : 'smooth', block: 'center' });
