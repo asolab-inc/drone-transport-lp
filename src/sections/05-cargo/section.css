@@ -296,3 +296,13 @@
   .s-cargo__cta-text { flex: 0 0 auto; }
   .s-cargo__cta .btn { justify-content: center; }
 }
+
+
+/* 写真を2枚に集約したので、主写真＋サブ1枚のモザイクに組み替える */
+@media (min-width: 1024px) {
+  .s-cargo__mosaic { grid-template-rows: auto; }
+  .s-cargo__ph--main { grid-row: 1 / 2; }
+  .s-cargo__ph--seedling2 { grid-column: 2; grid-row: 1 / 2; }
+}
+.s-cargo__ph .ph__cap { white-space: nowrap; }
+@media (max-width: 559px) { .s-cargo__ph .ph__cap { white-space: normal; } }

@@ -54,4 +54,4 @@
 .s-cases__agreements .source { margin-top: 18px; }
 
 /* 縦位置の写真は4:3枠で機体が切れるため、上寄りにトリミングする */
-.s-cases__card-media--portrait img { object-position: center 22%; }
+.s-cases__card-media--portrait img { object-position: center 10%; }

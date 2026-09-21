@@ -4,9 +4,9 @@
 .s-company__strengths { display: grid; gap: 2px; }
 .s-company__strength { padding: 22px 0; border-bottom: 1px solid var(--line); }
 .s-company__strength:first-child { padding-top: 0; }
-.s-company__strength-title { position: relative; font-size: var(--fs-h4); margin-bottom: 10px; padding-left: 18px; }
-.s-company__strength-title::before { content: ""; position: absolute; left: 0; top: .48em; width: 6px; height: 6px; border-radius: 50%; background: var(--blue-600); }
-.s-company__strength p { font-size: var(--fs-sm); line-height: 1.95; color: var(--text-2); padding-left: 18px; }
+.s-company__strength-title { display: flex; align-items: baseline; gap: 12px; font-size: var(--fs-h4); margin-bottom: 10px; }
+.s-company__strength-no { font-size: .875rem; color: var(--blue-600); opacity: .7; }
+.s-company__strength p { font-size: var(--fs-sm); line-height: 1.95; color: var(--text-2); padding-left: 32px; }
 .s-company__photo img { object-position: center 55%; }
 
 .s-company__profile { margin-top: clamp(48px, 5vw, 72px); }

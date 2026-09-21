@@ -344,3 +344,10 @@
   .s-aircraft__safety-list li:last-child h4 { margin-bottom: 0; white-space: nowrap; }
   .s-aircraft__safety-list li:last-child p { flex: 1; }
 }
+
+
+/* 図版をカード幅いっぱいに使い、ラベルを読めるサイズにする */
+.s-aircraft__mode-fig { width: 100%; max-width: 420px; margin-inline: auto; }
+.s-aircraft__mode-fig svg { width: 100%; height: auto; display: block; }
+.s-aircraft__mode-fig .ill-label { fill: var(--text-2); font-size: 12px; font-weight: 700; }
+.s-aircraft__mode-fig .ill-note { fill: var(--blue-300); font-size: 12px; font-weight: 700; }

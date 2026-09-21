@@ -38,3 +38,9 @@
 
 .s-price__cta { margin-top: clamp(48px, 5vw, 72px); padding: clamp(26px, 3vw, 40px); border-radius: var(--r-lg); background: var(--bg-soft); border: 1px solid var(--line); display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 20px; }
 .s-price__cta-text { font-size: var(--fs-sm); line-height: 1.8; color: var(--text-2); max-width: 34em; }
+
+/* 左右カードの高さが揃わず左下に空きが出ていたため、中身を上下に配分する */
+@media (min-width: 900px) {
+  .s-price__factors { display: flex; flex-direction: column; }
+  .s-price__note { margin-top: auto; }
+}

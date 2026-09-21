@@ -97,7 +97,8 @@
 .s-data__val .unit { font-size: .62em; color: var(--text-3); }
 .s-data__row--ref .s-data__val .num { color: var(--text-3); font-weight: 600; }
 
-.s-data__card > .source { margin-top: var(--s-6); }
+.s-data__card { display: flex; flex-direction: column; }
+.s-data__card > .source { margin-top: auto; padding-top: var(--s-6); }
 
 /* ---- Hakuba card ---- */
 .s-data__hakuba {

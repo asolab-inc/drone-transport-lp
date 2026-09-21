@@ -45,3 +45,9 @@ html.js .s-faq__item:not([open]) .s-faq__a { display: none; }
 html.js .s-faq__item[open] .s-faq__a { animation: faqIn .38s var(--ease); }
 @keyframes faqIn { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: none; } }
 @media (prefers-reduced-motion: reduce) { html.js .s-faq__item[open] .s-faq__a { animation: none; } }
+
+/* 左カラムが短く下に大きな空きが出るため、問い合わせ誘導をカラム下端に置く */
+@media (min-width: 900px) {
+  .s-faq__aside { display: flex; flex-direction: column; gap: 28px; }
+  .s-faq__help { margin-top: auto; }
+}
