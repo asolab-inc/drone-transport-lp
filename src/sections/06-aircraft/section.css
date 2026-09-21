@@ -142,7 +142,6 @@
   display: block;
   width: 100%;
   height: auto;
-  max-height: 150px;
   margin-inline: auto;
 }
 .s-aircraft__mode-fig .ill-drone path {
@@ -349,5 +348,12 @@
 /* 図版をカード幅いっぱいに使い、ラベルを読めるサイズにする */
 .s-aircraft__mode-fig { width: 100%; max-width: 420px; margin-inline: auto; }
 .s-aircraft__mode-fig svg { width: 100%; height: auto; display: block; }
-.s-aircraft__mode-fig .ill-label { fill: var(--text-2); font-size: 12px; font-weight: 700; }
-.s-aircraft__mode-fig .ill-note { fill: var(--blue-300); font-size: 12px; font-weight: 700; }
+.s-aircraft__mode-fig .ill-label { fill: var(--text-2); font-size: 8px; font-weight: 700; }
+.s-aircraft__mode-fig .ill-note { fill: var(--blue-300); font-size: 8.5px; font-weight: 700; }
+
+
+/* カードが狭くなる幅では図版の倍率が下がるため、文字のユーザー単位を上げて実寸を保つ */
+@media (max-width: 1023px) {
+  .s-aircraft__mode-fig .ill-label { font-size: 10px; }
+  .s-aircraft__mode-fig .ill-note { font-size: 10.5px; }
+}

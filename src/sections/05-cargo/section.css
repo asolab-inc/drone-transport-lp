@@ -306,3 +306,12 @@
 }
 .s-cargo__ph .ph__cap { white-space: nowrap; }
 @media (max-width: 559px) { .s-cargo__ph .ph__cap { white-space: normal; } }
+
+
+/* 写真を2枚に減らした分、モザイクをカラムの高さまで伸ばして下端を揃える */
+@media (min-width: 1024px) {
+  .s-cargo__cargo { align-items: stretch; }
+  .s-cargo__mosaic { height: 100%; grid-template-rows: minmax(0, 1fr); }
+  .s-cargo__ph--main, .s-cargo__ph--seedling2 { height: 100%; aspect-ratio: auto; }
+  .s-cargo__ph--main img, .s-cargo__ph--seedling2 img { height: 100%; }
+}

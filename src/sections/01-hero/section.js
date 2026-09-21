@@ -520,7 +520,7 @@ function boot(root) {
   const bagGeo = new LatheGeometry([
     [0.10, -1.00], [0.42, -0.97], [0.66, -0.86], [0.80, -0.62], [0.86, -0.28],
     [0.87, 0.06], [0.84, 0.34], [0.74, 0.56], [0.56, 0.72], [0.34, 0.82], [0.17, 0.90], [0.0, 0.94],
-  ].map(([x, y]) => new Vector3(x * BAG * 1.35, y * BAG * 1.5, 0)), 28);
+  ].map(([x, y]) => new Vector3(x * BAG * 1.18, y * BAG * 2.05, 0)), 28);
   {
     const p = bagGeo.attributes.position;
     for (let i = 0; i < p.count; i++) {
@@ -529,7 +529,9 @@ function boot(root) {
       if (r > 0.02) {
         const ang = Math.atan2(z, x);
         /* 詰め物のふくらみと布のたるみ */
-        const f = 1
+        const ty = (y + 0.86 * BAG * 2.05) / (1.9 * BAG * 2.05);
+        const taper = 0.80 + 0.20 * Math.min(1, Math.max(0, ty * 1.45));
+        const f = taper
           + 0.045 * Math.sin(ang * 4 + y * 1.6)
           + 0.022 * Math.sin(ang * 9 - y * 2.4)
           + 0.014 * Math.sin(ang * 15 + y * 3.1);
@@ -537,7 +539,7 @@ function boot(root) {
       }
     }
     bagGeo.computeVertexNormals();
-    bagGeo.translate(0, -0.86 * BAG * 1.5, 0);
+    bagGeo.translate(0, -0.86 * BAG * 2.05, 0);
   }
   const bagTex = fabricTexture();
   {
