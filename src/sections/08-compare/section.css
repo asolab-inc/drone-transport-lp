@@ -200,15 +200,22 @@
     color: var(--text-3);
   }
 
+  /* 網掛けをカードの内寸いっぱいに合わせる（罫線と端が揃う） */
   .s-compare__table tbody td.s-compare__col--drone {
     background: var(--blue-50);
-    margin-inline: calc(-1 * var(--s-3));
-    padding-inline: var(--s-3);
-    border-radius: var(--r-sm);
+    margin-inline: calc(-1 * var(--s-5));
+    padding-inline: var(--s-5);
+    border-radius: 0;
     border-bottom-color: transparent;
   }
 
   .s-compare__eval { padding: 5px 10px; font-size: var(--fs-xs); gap: 4px; }
 
   .s-compare__fit { grid-template-columns: 1fr; }
+}
+
+/* SPで凡例の折り返しが不揃いだったため、等幅グリッドに揃える */
+@media (max-width: 599px) {
+  .s-compare__legend { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px 12px; }
+  .s-compare__legend-item:last-child { grid-column: 1 / -1; }
 }

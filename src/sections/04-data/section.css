@@ -210,3 +210,13 @@
   .s-data__hcompare { gap: var(--s-3); }
   .s-data__harrow svg { width: 22px; height: 12px; }
 }
+
+/* 時間比較の行が中央寄せで、カードの左右と揃っていなかった。
+   左端から始め、条件リストを右端に寄せて両端を揃える */
+@media (min-width: 961px) {
+  .s-data__hcompare { justify-content: flex-start; }
+  .s-data__htime { text-align: left; }
+  .s-data__hbody { align-items: start; }
+}
+/* 注記が1行100文字を超えて読みにくかった */
+.s-data__caution { max-width: 46em; }

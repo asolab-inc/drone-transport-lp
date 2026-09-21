@@ -44,3 +44,9 @@
   .s-price__factors { display: flex; flex-direction: column; }
   .s-price__note { margin-top: auto; }
 }
+
+/* 「04 輸送」は機体が点にしか見えなかったため、寄って切り出す */
+.s-price__step:nth-child(4) .s-price__step-media img {
+  object-position: 52% 46%;
+  transform: scale(1.38);
+}
