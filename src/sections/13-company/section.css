@@ -7,7 +7,7 @@
 .s-company__strength-title { display: flex; align-items: baseline; gap: 12px; font-size: var(--fs-h4); margin-bottom: 10px; }
 .s-company__strength-no { font-size: .875rem; color: var(--blue-600); opacity: .7; }
 .s-company__strength p { font-size: var(--fs-sm); line-height: 1.95; color: var(--text-2); padding-left: 32px; }
-.s-company__photo img { object-position: center 55%; filter: saturate(1.18) contrast(1.05) brightness(1.05) sepia(.07); }
+.s-company__photo img { object-position: center 50%; }
 
 .s-company__profile { margin-top: clamp(48px, 5vw, 72px); }
 .s-company__profile-title { font-size: var(--fs-h4); margin-bottom: 20px; }

@@ -4237,7 +4237,7 @@ void main() {
       diffuseColor.rgb *= 1.0 + sin(vWP.x * 0.21 + 2.0) * sin(vWP.z * 0.18) * 0.06;
       /* \u9732\u51FA\u3057\u305F\u5CA9\u808C\u30FB\u571F */
       vec3 rock = vec3(0.35, 0.31, 0.27);
-      diffuseColor.rgb = mix(diffuseColor.rgb, rock, smoothstep(0.46, 0.86, slope) * 0.62 * (0.35 + 0.65 * nearK));
+      diffuseColor.rgb = mix(diffuseColor.rgb, rock, smoothstep(0.66, 0.94, slope) * 0.34 * (0.35 + 0.65 * nearK));
       /* \u7B49\u9AD8\u7DDA\uFF08\u6E2C\u91CF\u4F1A\u793E\u3089\u3057\u3055\uFF09 */
       float cf = vWP.y / 24.0;
       float cg = abs(fract(cf - 0.5) - 0.5) / max(fwidth(cf), 1e-5);

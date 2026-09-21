@@ -308,10 +308,17 @@
 @media (max-width: 559px) { .s-cargo__ph .ph__cap { white-space: normal; } }
 
 
-/* 写真を2枚に減らした分、モザイクをカラムの高さまで伸ばして下端を揃える */
+/* 写真は2枚。比率を保ったまま横に並べ、右の一覧とは独立した高さにする
+   （引き伸ばすと苗木が葉の接写になり、何の写真か分からなくなる） */
 @media (min-width: 1024px) {
-  .s-cargo__cargo { align-items: stretch; }
-  .s-cargo__mosaic { height: 100%; grid-template-rows: minmax(0, 1fr); }
-  .s-cargo__ph--main, .s-cargo__ph--seedling2 { height: 100%; aspect-ratio: auto; }
-  .s-cargo__ph--main img, .s-cargo__ph--seedling2 img { height: 100%; }
+  .s-cargo__cargo { align-items: start; }
+  .s-cargo__mosaic { grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr); height: auto; }
+  .s-cargo__ph--main { aspect-ratio: 3 / 2; height: auto; }
+  .s-cargo__ph--seedling2 { aspect-ratio: auto; height: 100%; }
+  .s-cargo__ph--seedling2 img { height: 100%; }
+}
+/* SPで2枚目が半幅のまま右半分が空セルになっていた */
+@media (max-width: 1023px) {
+  .s-cargo__mosaic { grid-template-columns: minmax(0, 1fr); }
+  .s-cargo__ph--sub { grid-column: 1; }
 }

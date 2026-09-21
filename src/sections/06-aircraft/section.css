@@ -357,3 +357,17 @@
   .s-aircraft__mode-fig .ill-label { font-size: 10px; }
   .s-aircraft__mode-fig .ill-note { font-size: 10.5px; }
 }
+
+/* 5項目を2列に置くと必ず穴が残るため、1列の行リストにして
+   見出しと説明を横に並べる（11-safety と同じ作法） */
+@media (min-width: 600px) {
+  .s-aircraft__safety-list { grid-template-columns: minmax(0, 1fr); gap: 0; }
+  .s-aircraft__safety-list li { align-items: center; padding: 18px 0; border-bottom: 1px solid var(--line); }
+  .s-aircraft__safety-list li:first-child { padding-top: 0; }
+  .s-aircraft__safety-list li:last-child { border-bottom: 0; }
+  .s-aircraft__safety-list li > div { display: flex; align-items: baseline; gap: 20px; flex: 1; }
+  .s-aircraft__safety-list li h4 { margin-bottom: 0; flex: 0 0 15em; }
+  .s-aircraft__safety-list li p { flex: 1; }
+}
+/* 暗背景で取り残されていた注記を、本文と同じ読める大きさに */
+.s-aircraft__spec-ast, .s-aircraft__title-ast, .s-aircraft .source { font-size: var(--fs-xs); color: var(--text-2); }
