@@ -45,7 +45,7 @@ const entry = [
 const js = await esbuild.build({
   stdin: { contents: entry, resolveDir: ROOT, loader: 'js' },
   bundle: true,
-  format: 'esm',
+  format: 'iife',
   minify: true,
   target: ['chrome110', 'safari16'],
   nodePaths: [join(ROOT, 'tools', 'node_modules')],
@@ -71,7 +71,7 @@ ${header}
 <main id="main">
 ${body}
 </main>
-<script type="module" src="${assetRel}/${tag}.js?v=${v}"></script>
+<script defer src="${assetRel}/${tag}.js?v=${v}"></script>
 </body>
 </html>
 `;
