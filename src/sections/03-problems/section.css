@@ -121,3 +121,9 @@
 @media (min-width: 1280px) {
   .s-problems__case--d .s-problems__media { flex-basis: 40%; }
 }
+
+
+/* CASE03 の俯瞰写真はスクリムが濃いと地形が読めず、隣のCASE04とも似て見える */
+.s-problems__case--c .s-problems__scrim {
+  background: linear-gradient(to top, rgba(5, 13, 26, .78) 0%, rgba(5, 13, 26, .30) 42%, rgba(5, 13, 26, 0) 70%);
+}

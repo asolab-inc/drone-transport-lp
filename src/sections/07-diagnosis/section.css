@@ -147,7 +147,7 @@
 .s-diagnosis__result.is-in { opacity: 1; transform: none; }
 
 .s-diagnosis__result--neutral { background: var(--blue-50); border-color: var(--blue-200); }
-.s-diagnosis__result--positive { background: var(--ok-bg); border-color: color-mix(in srgb, var(--ok) 30%, var(--ok-bg)); }
+.s-diagnosis__result--positive { background: var(--blue-50); border-color: var(--blue-200); }
 .s-diagnosis__result--other { background: var(--warn-bg); border-color: color-mix(in srgb, var(--warn) 30%, var(--warn-bg)); }
 
 .s-diagnosis__result-title {
@@ -158,7 +158,7 @@
   color: var(--text);
 }
 .s-diagnosis__result--neutral .s-diagnosis__result-title { color: var(--accent-text); }
-.s-diagnosis__result--positive .s-diagnosis__result-title { color: var(--ok); }
+.s-diagnosis__result--positive .s-diagnosis__result-title { color: var(--blue-700); }
 .s-diagnosis__result--other .s-diagnosis__result-title { color: var(--warn); }
 
 .s-diagnosis__result-body {
