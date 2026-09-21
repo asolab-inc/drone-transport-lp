@@ -540,8 +540,29 @@ function boot(root) {
     bagGeo.translate(0, -0.86 * BAG * 1.5, 0);
   }
   const bagTex = fabricTexture();
+  {
+    /* 布のたるみに沿った陰影を頂点カラーに焼き込む（均一発光の風船に見せない） */
+    const pos = bagGeo.attributes.position;
+    const col = new Float32Array(pos.count * 3);
+    let minY = Infinity, maxY = -Infinity;
+    for (let i = 0; i < pos.count; i++) { const y = pos.getY(i); if (y < minY) minY = y; if (y > maxY) maxY = y; }
+    const span = Math.max(1e-4, maxY - minY);
+    for (let i = 0; i < pos.count; i++) {
+      const x = pos.getX(i), y = pos.getY(i), z = pos.getZ(i);
+      const t = (y - minY) / span;                 /* 0=底 1=上 */
+      const ang = Math.atan2(z, x);
+      let k = 0.52 + 0.48 * Math.pow(t, 0.72);     /* 底ほど暗い */
+      k *= 1 - 0.20 * Math.pow(Math.max(0, t - 0.62) / 0.38, 1.4); /* 絞り口の影 */
+      k *= 1 + 0.07 * Math.sin(ang * 4 + 0.8);     /* ベルト位置に沿った明暗 */
+      k *= 0.94 + 0.06 * Math.sin(ang * 11 + y * 2.0); /* 布のしわ */
+      k = Math.max(0.3, Math.min(1.12, k));
+      col[i * 3] = k; col[i * 3 + 1] = k; col[i * 3 + 2] = k;
+    }
+    bagGeo.setAttribute('color', new BufferAttribute(col, 3));
+  }
   const bag = new Mesh(bagGeo, new MeshStandardMaterial({
-    map: bagTex, color: 0xe4b871, roughness: 0.95, metalness: 0,
+    map: bagTex, bumpMap: bagTex, bumpScale: 0.6,
+    color: 0xcda368, roughness: 1, metalness: 0, vertexColors: true, flatShading: false,
   }));
   scene.add(bag);
 
@@ -684,7 +705,7 @@ function boot(root) {
   function placeCamera(dt, snap) {
     const aspect = camera.aspect;
     const wide = aspect >= 1.05;
-    const dist = wide ? 25 : 34;
+    const dist = wide ? 25 : 24;
     const yaw = Math.atan2(st.vel.x, st.vel.z) + Math.PI + Math.sin(st.t * 0.085) * 0.42 - 0.2;
     const height = (wide ? 4.2 : 5.4) + Math.sin(st.t * 0.061 + 2.2) * 2.1;
     camWant.set(
