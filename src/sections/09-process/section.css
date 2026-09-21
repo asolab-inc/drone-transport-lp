@@ -52,3 +52,9 @@
 @media (min-width: 900px) {
   .s-process__video { max-width: 900px; margin-inline: auto; }
 }
+
+/* SPでは図版の倍率が下がり、SVG内の文字が9〜10px相当まで縮む。
+   ユーザー単位を上げて実寸を保つ（06-aircraft と同じ手法） */
+@media (max-width: 767px) {
+  .s-process__figure text { font-size: 15px; }
+}

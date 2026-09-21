@@ -23,7 +23,7 @@
 {"@context":"https://schema.org","@type":"Service","serviceType":"ドローンによる物資輸送","name":"ドローン物資輸送","areaServed":"長野県を中心とした中部エリア","provider":{"@type":"Organization","name":"株式会社ASOLAB.","url":"https://asolab.co.jp/","telephone":"+81-263-88-6968","email":"mail@asolab.co.jp","address":{"@type":"PostalAddress","postalCode":"399-0014","addressRegion":"長野県","addressLocality":"松本市","streetAddress":"平田東2-14-5","addressCountry":"JP"}}}
 </script>
 
-<link rel="stylesheet" href="assets/app.css?v=66457fe5">
+<link rel="stylesheet" href="assets/app.css?v=ce70dbb2">
 </head>
 <body>
 <a class="skip-link" href="#main">本文へスキップ</a>
@@ -168,7 +168,7 @@
       <!-- CASE 03 -->
       <li class="s-problems__case s-problems__case--c" data-reveal="fade" style="--i:3">
         <div class="s-problems__media">
-          <img src="images/scene-slope2.jpg" srcset="images/sm/scene-slope2.jpg 960w, images/scene-slope2.jpg 1800w" sizes="(min-width: 1280px) 460px, (min-width: 760px) 38vw, calc(100vw - 40px)" width="1800" height="1200" loading="lazy" decoding="async" alt="上空から見た急斜面の植林地。伐採後に苗木を植えた区画が斜面に広がる">
+          <img src="images/scene-aerial.jpg" srcset="images/sm/scene-aerial.jpg 960w, images/scene-aerial.jpg 1800w" sizes="(min-width: 1280px) 460px, (min-width: 760px) 38vw, calc(100vw - 40px)" width="1800" height="1200" loading="lazy" decoding="async" alt="上空から見た急斜面の植林地。伐採後に苗木を植えた区画が斜面に広がる">
         </div>
         <div class="s-problems__scrim" aria-hidden="true"></div>
         <div class="s-problems__content">
@@ -181,9 +181,10 @@
       <!-- CASE 04 -->
       <li class="s-problems__case s-problems__case--d" data-reveal="fade" style="--i:4">
         <div class="s-problems__media">
-          <img src="images/scene-aerial.jpg" srcset="images/sm/scene-aerial.jpg 960w, images/scene-aerial.jpg 1800w" sizes="(min-width: 760px) 34vw, calc(100vw - 40px)" width="1800" height="1200" loading="lazy" decoding="async" alt="上空から見た急斜面の植林地。斜面の途中に伐採跡と苗木の区画がある">
+          <img src="images/scene-slope2.jpg" srcset="images/sm/scene-slope2.jpg 960w, images/scene-slope2.jpg 1800w" sizes="(min-width: 760px) 34vw, calc(100vw - 40px)" width="1800" height="1200" loading="lazy" decoding="async" alt="伐採跡が段状に見える山の斜面">
         </div>
-        <div class="s-problems__body">
+        <div class="s-problems__scrim" aria-hidden="true"></div>
+        <div class="s-problems__content">
           <p class="s-problems__no">CASE 04</p>
           <h3 class="s-problems__h3">危険な区間を歩く</h3>
           <p class="s-problems__text">法面や急斜面、崩落箇所。荷物を持って歩くには、負担も危険も大きい区間です。</p>
@@ -343,6 +344,17 @@
           <h3 class="s-cargo__h3">運べるもの</h3>
         </div>
 
+    <div class="s-cargo__band">
+      <a class="s-cargo__spec" href="#aircraft" data-reveal style="--i:5">
+        <span class="s-cargo__spec-body">
+          <span class="s-cargo__spec-k">1回に吊り下げられる重さ</span>
+          <span class="s-cargo__spec-v"><span class="s-cargo__spec-pre">最大</span><span class="num">40</span><span class="unit">kg</span><span class="s-cargo__spec-ast">*</span></span>
+        </span>
+        <span class="s-cargo__spec-go">機体・性能を見る<span class="s-cargo__spec-arrow" aria-hidden="true"></span></span>
+      </a>
+      
+    </div>
+
         <ul class="s-cargo__list">
           <li class="s-cargo__item" data-reveal style="--i:1">
             <span class="s-cargo__icon" aria-hidden="true">
@@ -382,13 +394,7 @@
           </li>
         </ul>
 
-        <a class="s-cargo__spec" href="#aircraft" data-reveal style="--i:5">
-          <span class="s-cargo__spec-body">
-            <span class="s-cargo__spec-k">1回に吊り下げられる重さ</span>
-            <span class="s-cargo__spec-v"><span class="s-cargo__spec-pre">最大</span><span class="num">40</span><span class="unit">kg</span><span class="s-cargo__spec-ast">*</span></span>
-          </span>
-          <span class="s-cargo__spec-go">機体・性能を見る<span class="s-cargo__spec-arrow" aria-hidden="true"></span></span>
-        </a>
+
         <p class="note s-cargo__spec-note">* DJI FlyCart 30、シングルバッテリー時。デュアルバッテリー時は30kg（DJI公表値）。実際に運べる量は、距離・高低差・風などの現場条件で変わります。</p>
       </div>
     </div>
@@ -1602,6 +1608,6 @@
 </footer>
 
 </main>
-<script type="module" src="assets/app.js?v=66457fe5"></script>
+<script type="module" src="assets/app.js?v=ce70dbb2"></script>
 </body>
 </html>

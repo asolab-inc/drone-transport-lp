@@ -12,7 +12,8 @@
 }
 .s-problems__case--a,
 .s-problems__case--b,
-.s-problems__case--c {
+.s-problems__case--c,
+.s-problems__case--d {
   overflow: hidden;
   border-radius: var(--r-lg);
   background: var(--bg-mist);
@@ -25,7 +26,8 @@
 }
 .s-problems__case--a,
 .s-problems__case--b,
-.s-problems__case--c {
+.s-problems__case--c,
+.s-problems__case--d {
   position: relative;
 }
 .s-problems__media img {
@@ -35,7 +37,7 @@
 }
 .s-problems__case--a .s-problems__media img { object-position: center center; }
 .s-problems__case--b .s-problems__media img { object-position: center 35%; }
-.s-problems__case--c .s-problems__media img { object-position: 50% 45%; }
+.s-problems__case--c .s-problems__media img { object-position: 50% 50%; }
 
 .s-problems__scrim {
   position: absolute;
@@ -74,31 +76,8 @@
 }
 
 /* ---- CASE 04: split card (photo + text) ---- */
-.s-problems__case--d {
-  display: flex;
-  flex-direction: column;
-  border-radius: var(--r-lg);
-  border: 1px solid var(--line);
-  background: var(--bg-soft);
-  box-shadow: var(--shadow);
-  overflow: hidden;
-}
-.s-problems__case--d .s-problems__media {
-  position: relative;
-  aspect-ratio: 4 / 3;
-}
-.s-problems__case--d .s-problems__media img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: 50% 58%;
-}
-.s-problems__case--d .s-problems__body {
-  padding: clamp(20px, 2.6vw, 30px);
-}
-.s-problems__case--d .s-problems__no { color: var(--accent-text); }
-.s-problems__case--d .s-problems__h3 { color: var(--text); margin-top: 8px; }
-.s-problems__case--d .s-problems__text { color: var(--text-2); max-width: none; }
+.s-problems__case--d .s-problems__media img { object-position: 50% 52%; }
+
 
 /* ---- transition line ---- */
 .s-problems__next {
@@ -125,12 +104,8 @@
   .s-problems__case--a { grid-area: a; aspect-ratio: auto; }
   .s-problems__case--b { grid-area: b; aspect-ratio: auto; }
   .s-problems__case--c { grid-area: c; aspect-ratio: auto; }
-  .s-problems__case--d { grid-area: d; flex-direction: row; }
+  .s-problems__case--d { grid-area: d; aspect-ratio: auto; }
 
-  .s-problems__case--d .s-problems__media {
-    flex: 0 0 44%;
-    aspect-ratio: auto;
-  }
   .s-problems__case--d .s-problems__body {
     flex: 1;
     display: flex;

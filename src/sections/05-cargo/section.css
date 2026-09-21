@@ -322,3 +322,10 @@
   .s-cargo__mosaic { grid-template-columns: minmax(0, 1fr); }
   .s-cargo__ph--sub { grid-column: 1; }
 }
+
+
+/* 「1回に吊り下げられる重さ」はこのセクション最大の事実。
+   右カラムの隅に畳まず、2カラムの下に全幅の帯として置く */
+.s-cargo__band { grid-column: 1 / -1; margin-top: clamp(24px, 3vw, 36px); }
+.s-cargo__band .s-cargo__spec { width: 100%; }
+.s-cargo__band .s-cargo__spec-note { margin-top: 10px; }

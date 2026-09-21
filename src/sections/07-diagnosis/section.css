@@ -178,8 +178,11 @@
 
 /* SPで選択肢の幅が文字数に応じてバラつき、右端がギザギザになっていた。
    等幅グリッドに変えて揃える */
+/* SPは2列。3列だと1枠95pxしかなく日本語ラベルが枠外へ溢れる。
+   3つ目だけ全幅にして、幅は揃えつつ文字を収める */
 @media (max-width: 767px) {
-  .s-diagnosis__opts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+  .s-diagnosis__opts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
   .s-diagnosis__opt { min-width: 0; }
-  .s-diagnosis__opt span { width: 100%; justify-content: center; text-align: center; padding-inline: 6px; }
+  .s-diagnosis__opt:nth-child(3) { grid-column: 1 / -1; }
+  .s-diagnosis__opt span { width: 100%; justify-content: center; text-align: center; padding-inline: 10px; }
 }

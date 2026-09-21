@@ -272,16 +272,15 @@
   .s-hero__chip--text .s-hero__chip-v { font-size: var(--fs-base); }
   .s-hero__chip-k { flex: 1; }
   .s-hero__foot { margin-top: 12px; }
+  /* 92px では実写が読めず、3Dと現実を結ぶという役割を果たせない */
   .s-hero__inset {
     width: 100%;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 10px;
+    display: block;
+    padding: 12px;
     margin-top: 20px;
   }
-  .s-hero__inset-ph { width: 92px; flex: none; aspect-ratio: 4 / 3; }
-  .s-hero__inset-cap { margin-top: 0; }
+  .s-hero__inset-ph { width: 100%; aspect-ratio: 16 / 9; }
+  .s-hero__inset-cap { margin-top: 10px; }
   .s-hero__scroll { display: none; }
 }
 
