@@ -209,12 +209,12 @@ function boot(root) {
 
   renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, dprCap));
   renderer.toneMapping = ACESFilmicToneMapping;
-  renderer.toneMappingExposure = 1.30;
+  renderer.toneMappingExposure = 0.92;
 
   /* ---------- scene ---------- */
-  const HORIZON = 0x5e89b0;
+  const HORIZON = 0xd8e6f2;
   const scene = new Scene();
-  scene.fog = new Fog(HORIZON, 480, 1960);
+  scene.fog = new Fog(0xdfeaf3, 760, 2600);
   const camera = new PerspectiveCamera(42, 16 / 9, 1, 6400);
   const sunDir = new Vector3(-0.54, 0.3, -0.79).normalize();
 
@@ -223,8 +223,8 @@ function boot(root) {
   {
     const p = skyGeo.attributes.position;
     const col = new Float32Array(p.count * 3);
-    const cTop = new Color(0x050d1a), cMid = new Color(0x17457a);
-    const cHor = new Color(HORIZON), cWarm = new Color(0xecb886), cLow = new Color(0x16314e);
+    const cTop = new Color(0x8fb9dd), cMid = new Color(0xbcd7ec);
+    const cHor = new Color(HORIZON), cWarm = new Color(0xfbf0e2), cLow = new Color(0xe8eef4);
     const c = new Color(), d = new Vector3();
     for (let i = 0; i < p.count; i++) {
       d.set(p.getX(i), p.getY(i), p.getZ(i)).normalize();
@@ -243,13 +243,13 @@ function boot(root) {
   scene.add(sky);
 
   /* light — low morning sun + sky bounce */
-  const sun = new DirectionalLight(0xffe3c0, 3.0);
+  const sun = new DirectionalLight(0xfff3e2, 2.5);
   sun.position.copy(sunDir).multiplyScalar(1600);
   scene.add(sun);
   const bounce = new DirectionalLight(0x8ab8ff, 0.5);
   bounce.position.set(0.6, 0.3, 0.74).multiplyScalar(900);
   scene.add(bounce);
-  scene.add(new HemisphereLight(0xc7e2ff, 0x2c4529, 1.75));
+  scene.add(new HemisphereLight(0xdcecff, 0x33502f, 1.15));
 
   /* ---------- terrain ---------- */
   const terrGeo = new PlaneGeometry(SIZE, SIZE, SEG, SEG);
@@ -318,7 +318,7 @@ function boot(root) {
       float cf = vWP.y / 24.0;
       float cg = abs(fract(cf - 0.5) - 0.5) / max(fwidth(cf), 1e-5);
       float cline = (1.0 - clamp(cg, 0.0, 1.0)) * (1.0 - smoothstep(280.0, 1500.0, camD));
-      diffuseColor.rgb += cline * 0.075 * vec3(0.42, 0.66, 1.0);`
+      diffuseColor.rgb += cline * 0.05 * vec3(0.20, 0.42, 0.85);`
     );
   };
   terrMat.customProgramCacheKey = () => 'aso-hero-terrain';
