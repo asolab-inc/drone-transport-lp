@@ -371,3 +371,8 @@
 }
 /* 暗背景で取り残されていた注記を、本文と同じ読める大きさに */
 .s-aircraft__spec-ast, .s-aircraft__title-ast, .s-aircraft .source { font-size: var(--fs-xs); color: var(--text-2); }
+
+/* 芝生の駐機2枚は同じ絵だったため1枚に絞った。残る1枚を主写真の下に全幅で置く */
+@media (min-width: 760px) {
+  .s-aircraft__sub-grid { grid-template-columns: minmax(0, 1fr); }
+}

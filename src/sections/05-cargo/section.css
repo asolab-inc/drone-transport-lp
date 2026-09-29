@@ -335,3 +335,9 @@
 @media (min-width: 1024px) {
   .s-cargo__band, .s-cargo__spec-note { grid-column: 1 / -1; }
 }
+
+/* 写真を1枚に絞ったので、2枚前提のグリッドをやめて主写真を大きく見せる */
+@media (min-width: 1024px) {
+  .s-cargo__mosaic { grid-template-columns: minmax(0, 1fr); }
+  .s-cargo__ph--main { aspect-ratio: 4 / 3; }
+}
