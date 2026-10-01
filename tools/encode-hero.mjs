@@ -56,12 +56,17 @@ const b64 = await page.evaluate(async ({ start, len, w, h, kbps }) => {
   if (sh > v.videoHeight / ZOOM) { sh = v.videoHeight / ZOOM; sw = sh * outA; }
   const sx = (v.videoWidth - sw) / 2;
   const sy = Math.max(0, Math.min(v.videoHeight - sh, v.videoHeight * CY - sh / 2));
+  /* 逆光の空に対して機体と荷が薄く沈むため、コントラストと彩度を上げて濃くする。
+     コントラストは暗部をより暗くするので、空を飛ばさずに機体だけが締まる */
+  const GRADE = 'contrast(1.3) saturate(1.3) brightness(0.99)';
   const draw = () => {
     g.save();
+    g.filter = GRADE;
     g.translate(w, 0);
     g.scale(-1, 1);
     g.drawImage(v, sx, sy, sw, sh, 0, 0, w, h);
     g.restore();
+    g.filter = 'none';
   };
 
   /* seek するとレンダラが落ちるため、早送りで頭出しする */
