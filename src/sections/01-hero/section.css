@@ -20,7 +20,7 @@
   background: linear-gradient(180deg, #cfe2f2 0%, #e4eef6 52%, #f4f8fb 100%);
 }
 .s-hero__photo,
-.s-hero__video {
+.s-hero__canvas {
   position: absolute;
   inset: 0;
   width: 100%;
@@ -28,17 +28,18 @@
 }
 .s-hero__photo {
   object-fit: cover;
-  object-position: 62% 46%;
+  object-position: 62% 38%;
+  transform: scale(1.04);
   transition: opacity .9s var(--ease);
 }
-.s-hero__video {
-  object-fit: cover;
-  object-position: 62% 46%;
+.s-hero__canvas {
   opacity: 0;
   transition: opacity .9s var(--ease);
 }
-.s-hero__stage.is-video .s-hero__video { opacity: 1; }
-.s-hero__stage.is-video .s-hero__photo { opacity: 0; }
+.s-hero__stage.is-3d .s-hero__canvas { opacity: 1; }
+.s-hero__stage.is-3d .s-hero__photo { opacity: 0; }
+.s-hero__stage.is-instant .s-hero__canvas,
+.s-hero__stage.is-instant .s-hero__photo { transition: none; }
 
 .s-hero__scrim {
   position: absolute;
@@ -238,7 +239,7 @@
     align-items: flex-end;
     padding-block: calc(var(--header-h) + clamp(148px, 25vh, 236px)) 44px;
   }
-  .s-hero__photo, .s-hero__video { object-position: center 42%; }
+  .s-hero__photo { object-position: 58% 34%; }
   .s-hero__scrim {
     background:
       linear-gradient(180deg, rgba(5, 13, 26, .58) 0%, rgba(5, 13, 26, .12) 18%, rgba(5, 13, 26, .28) 38%, rgba(5, 13, 26, .88) 60%, rgba(5, 13, 26, .96) 100%);
