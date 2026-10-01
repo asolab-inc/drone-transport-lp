@@ -29,7 +29,7 @@ setTimeout(function () { if (!window.ASO) document.documentElement.classList.rem
 {"@context":"https://schema.org","@type":"Service","serviceType":"ドローンによる物資輸送","name":"ドローン物資輸送","areaServed":"長野県を中心とした中部エリア","provider":{"@type":"Organization","name":"株式会社ASOLAB.","url":"https://asolab.co.jp/","telephone":"+81-263-88-6968","email":"mail@asolab.co.jp","address":{"@type":"PostalAddress","postalCode":"399-0014","addressRegion":"長野県","addressLocality":"松本市","streetAddress":"平田東2-14-5","addressCountry":"JP"}}}
 </script>
 
-<link rel="stylesheet" href="assets/app.css?v=40ce5032">
+<link rel="stylesheet" href="assets/app.css?v=4d276dff">
 </head>
 <body>
 <a class="skip-link" href="#main">本文へスキップ</a>
@@ -388,18 +388,6 @@ setTimeout(function () { if (!window.ASO) document.documentElement.classList.rem
           </li>
         </ul>
       </div>
-
-    <div class="s-cargo__band">
-      <a class="s-cargo__spec" href="#aircraft" data-reveal style="--i:5">
-        <span class="s-cargo__spec-body">
-          <span class="s-cargo__spec-k">1回に吊り下げられる重さ</span>
-          <span class="s-cargo__spec-v"><span class="s-cargo__spec-pre">最大</span><span class="num">40</span><span class="unit">kg</span><span class="s-cargo__spec-ast">*</span></span>
-        </span>
-        <span class="s-cargo__spec-go">機体・性能を見る<span class="s-cargo__spec-arrow" aria-hidden="true"></span></span>
-      </a>
-      
-      <p class="note s-cargo__spec-note">* DJI FlyCart 30、シングルバッテリー時。デュアルバッテリー時は30kg（DJI公表値）。実際に運べる量は、距離・高低差・風などの現場条件で変わります。</p>
-    </div>
     </div>
 
     <!-- ===== FIELD ===== -->
@@ -507,12 +495,6 @@ setTimeout(function () { if (!window.ASO) document.documentElement.classList.rem
       </ul>
     </div>
 
-    <!-- ===== CTA ===== -->
-    <div class="s-cargo__cta" data-reveal>
-      <p class="s-cargo__cta-text">場所・荷物・おおよその重量が分かれば、計画段階でもご相談いただけます。</p>
-      <a class="btn btn--primary" href="#contact">この荷物が運べるか相談する</a>
-    </div>
-
   </div>
 </section>
 
@@ -531,12 +513,6 @@ setTimeout(function () { if (!window.ASO) document.documentElement.classList.rem
       <div class="ph s-aircraft__hero-ph">
         <img src="images/aircraft-01.jpg" srcset="images/sm/aircraft-01.jpg 960w, images/aircraft-01.jpg 1800w" sizes="(min-width: 1280px) 1176px, (min-width: 1024px) 84vw, calc(100vw - 40px)" width="1800" height="1200" loading="lazy" decoding="async" alt="正面から見たDJI FlyCart 30。4組のプロペラを広げ、脚を伸ばして芝生の上に立つ姿">
         <span class="ph__cap">DJI FlyCart 30（2025年9月・大町市 防災用ドローンデモ）</span>
-      </div>
-      <div class="s-aircraft__sub-grid">
-        <div class="ph ph--4x3 s-aircraft__sub-ph s-aircraft__sub-ph--truck">
-          <img src="images/aircraft-truck.jpg" srcset="images/sm/aircraft-truck.jpg 960w, images/aircraft-truck.jpg 1800w" sizes="(min-width: 1280px) 560px, (min-width: 768px) 42vw, calc(100vw - 40px)" width="1800" height="1350" loading="lazy" decoding="async" alt="運搬車両の前に置かれたDJI FlyCart 30と、周囲で準備をするスタッフ。奥に山並みが見える">
-          <span class="ph__cap">DJI FlyCart 30（2026年1月）</span>
-        </div>
       </div>
     </figure>
 
@@ -878,7 +854,7 @@ setTimeout(function () { if (!window.ASO) document.documentElement.classList.rem
               <th scope="row" role="rowheader">小口の資材輸送</th>
               <td role="cell" class="s-compare__col--drone" data-label="ドローン"><span class="s-compare__eval s-compare__eval--ok"><span class="s-compare__mark" aria-hidden="true">◎</span>向いている</span></td>
               <td role="cell" data-label="ヘリコプター"><span class="s-compare__eval s-compare__eval--warn"><span class="s-compare__mark" aria-hidden="true">△</span>条件次第</span></td>
-              <td role="cell" data-label="人力"><span class="s-compare__eval s-compare__eval--warn"><span class="s-compare__mark" aria-hidden="true">△</span>条件次第</span></td>
+              <td role="cell" data-label="人力"><span class="s-compare__eval s-compare__eval--ok"><span class="s-compare__mark" aria-hidden="true">◎</span>向いている</span></td>
             </tr>
             <tr role="row">
               <th scope="row" role="rowheader">少量を繰り返し運ぶ</th>
@@ -916,7 +892,7 @@ setTimeout(function () { if (!window.ASO) document.documentElement.classList.rem
     </div>
 
     <div class="s-compare__note" data-reveal>
-      <p><strong>ヘリが適する輸送もあります。</strong> 大量・大重量の一括輸送ではヘリが有力です。小口・繰り返し・進入困難地への輸送では、ドローンを比較対象に入れられます。</p>
+      <p><strong>ヘリにも人力にも、適する場面があります。</strong> 大量・大重量の一括輸送ではヘリが有力です。車両で近くまで入れる小口の資材なら、人が運ぶのが最も手早く確実です。ドローンが比較対象に入るのは、その運搬を何度も繰り返す場合や、歩いて入るのに時間と負担がかかる場合です。</p>
     </div>
 
     <!-- ===== FIT / NOT FIT ===== -->
@@ -950,6 +926,7 @@ setTimeout(function () { if (!window.ASO) document.documentElement.classList.rem
           <li>極端な長距離輸送が必要</li>
           <li>飛行経路の安全を確保できない</li>
           <li>天候・周辺環境上、運航が難しい</li>
+          <li>車両で近くまで入れ、人力で十分運べる</li>
         </ul>
       </div>
     </div>
@@ -1599,6 +1576,6 @@ setTimeout(function () { if (!window.ASO) document.documentElement.classList.rem
 </footer>
 
 </main>
-<script defer src="assets/app.js?v=40ce5032"></script>
+<script defer src="assets/app.js?v=4d276dff"></script>
 </body>
 </html>
