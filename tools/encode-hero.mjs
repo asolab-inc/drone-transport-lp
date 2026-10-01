@@ -84,11 +84,13 @@ const b64 = await page.evaluate(async ({ start, len, w, h, kbps }) => {
   rec.ondataavailable = (e) => { if (e.data.size) chunks.push(e.data); };
   const done = new Promise((res) => { rec.onstop = res; });
   const t0 = v.currentTime;
+  let posterData = null;
   rec.start();
   await new Promise((finish) => {
     const frame = () => {
       const el = v.currentTime - t0;
       draw();
+      if (!posterData && el > len * 0.45) posterData = c.toDataURL('image/jpeg', 0.82);
       const a = Math.max(
         Math.min(1, Math.max(0, 1 - el / FADE)),
         Math.min(1, Math.max(0, (el - (len - FADE)) / FADE))
@@ -103,9 +105,8 @@ const b64 = await page.evaluate(async ({ start, len, w, h, kbps }) => {
   await done;
   v.pause();
 
-  /* 静止画：中ほどのコマを白板なしで描き直す */
-  draw();
-  const poster = c.toDataURL('image/jpeg', 0.82);
+  /* 静止画はクリップの中ほどのコマ（白板をかける前に控えてある） */
+  const poster = posterData || c.toDataURL('image/jpeg', 0.82);
 
   const buf = await new Blob(chunks, { type: 'video/mp4' }).arrayBuffer();
   let s = '';
