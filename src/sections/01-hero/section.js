@@ -3,11 +3,11 @@
    山の稜線を越えて荷物を吊り下げ輸送するイメージ（3DCG）
    ============================================================ */
 import {
-  ACESFilmicToneMapping, AdditiveBlending, BackSide, BoxGeometry, BufferAttribute,
+  AdditiveBlending, BackSide, BoxGeometry, BufferAttribute,
   BufferGeometry, CanvasTexture, CatmullRomCurve3, CircleGeometry, Color, CylinderGeometry,
   DirectionalLight, DoubleSide, Euler, Fog, Group, HemisphereLight, LatheGeometry, MathUtils,
   Mesh, MeshBasicMaterial, MeshLambertMaterial, MeshStandardMaterial, PerspectiveCamera,
-  PlaneGeometry, Quaternion, RepeatWrapping, RingGeometry, Scene, SphereGeometry, SRGBColorSpace,
+  NoToneMapping, PlaneGeometry, Quaternion, RepeatWrapping, RingGeometry, Scene, SphereGeometry, SRGBColorSpace,
   TorusGeometry, Vector3, WebGLRenderer,
 } from 'three';
 
@@ -118,14 +118,14 @@ function fabricTexture() {
   const c = document.createElement('canvas');
   c.width = c.height = 256;
   const g = c.getContext('2d');
-  g.fillStyle = '#c9a468';
+  g.fillStyle = '#f2ead9';
   g.fillRect(0, 0, 256, 256);
   for (let y = 0; y < 256; y += 3) {
-    g.fillStyle = y % 6 === 0 ? 'rgba(255,255,255,.10)' : 'rgba(90,60,25,.10)';
+    g.fillStyle = y % 6 === 0 ? 'rgba(255,255,255,.14)' : 'rgba(120,92,44,.09)';
     g.fillRect(0, y, 256, 1.5);
   }
   for (let x = 0; x < 256; x += 3) {
-    g.fillStyle = x % 6 === 0 ? 'rgba(255,255,255,.07)' : 'rgba(90,60,25,.08)';
+    g.fillStyle = x % 6 === 0 ? 'rgba(255,255,255,.10)' : 'rgba(120,92,44,.07)';
     g.fillRect(x, 0, 1.5, 256);
   }
   for (let i = 0; i < 220; i++) {
@@ -137,7 +137,7 @@ function fabricTexture() {
     g.arc(Math.random() * 256, Math.random() * 256, r, 0, Math.PI * 2);
     g.fill();
   }
-  g.strokeStyle = 'rgba(70,48,20,.3)';
+  g.strokeStyle = 'rgba(120,92,44,.26)';
   g.lineWidth = 2;
   g.setLineDash([5, 4]);
   for (const x of [40, 216]) { g.beginPath(); g.moveTo(x, 0); g.lineTo(x, 256); g.stroke(); }
@@ -208,14 +208,15 @@ function boot(root) {
   const HALF = SIZE / 2;
 
   renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, dprCap));
-  renderer.toneMapping = ACESFilmicToneMapping;
-  renderer.toneMappingExposure = 0.92;
+  renderer.toneMapping = NoToneMapping;
+  renderer.toneMappingExposure = 1;
+  renderer.setClearColor(0xffffff, 1);
 
   /* ---------- scene ---------- */
-  const HORIZON = 0xd8e6f2;
+  const HORIZON = 0xffffff;
   const scene = new Scene();
-  scene.fog = new Fog(0xdfeaf3, 760, 2600);
-  const camera = new PerspectiveCamera(42, 16 / 9, 1, 6400);
+  scene.fog = new Fog(0xffffff, 780, 3100);
+  const camera = new PerspectiveCamera(38, 16 / 9, 1, 6400);
   const sunDir = new Vector3(-0.54, 0.3, -0.79).normalize();
 
   /* sky dome — vertex coloured, no custom shader */
@@ -223,8 +224,8 @@ function boot(root) {
   {
     const p = skyGeo.attributes.position;
     const col = new Float32Array(p.count * 3);
-    const cTop = new Color(0x8fb9dd), cMid = new Color(0xbcd7ec);
-    const cHor = new Color(HORIZON), cWarm = new Color(0xfbf0e2), cLow = new Color(0xe8eef4);
+    const cTop = new Color(0xb9d6f1), cMid = new Color(0xdcebf9);
+    const cHor = new Color(HORIZON), cWarm = new Color(0xffffff), cLow = new Color(0xffffff);
     const c = new Color(), d = new Vector3();
     for (let i = 0; i < p.count; i++) {
       d.set(p.getX(i), p.getY(i), p.getZ(i)).normalize();
@@ -232,8 +233,8 @@ function boot(root) {
       c.copy(cHor).lerp(cMid, sstep(t, 0.0, 0.3));
       c.lerp(cTop, sstep(t, 0.24, 0.82));
       if (t < 0.03) c.lerp(cLow, sstep(-t, -0.03, 0.18));
-      const warm = Math.pow(Math.max(d.dot(sunDir), 0), 3.4) * 0.62 * (1 - sstep(t, 0.08, 0.5));
-      c.lerp(cWarm, clamp(warm, 0, 0.72));
+      const warm = Math.pow(Math.max(d.dot(sunDir), 0), 4.2) * 0.16 * (1 - sstep(t, 0.08, 0.5));
+      c.lerp(cWarm, clamp(warm, 0, 0.18));
       col[i * 3] = c.r; col[i * 3 + 1] = c.g; col[i * 3 + 2] = c.b;
     }
     skyGeo.setAttribute('color', new BufferAttribute(col, 3));
@@ -243,13 +244,13 @@ function boot(root) {
   scene.add(sky);
 
   /* light — low morning sun + sky bounce */
-  const sun = new DirectionalLight(0xfff3e2, 2.5);
+  const sun = new DirectionalLight(0xffffff, 2.2);
   sun.position.copy(sunDir).multiplyScalar(1600);
   scene.add(sun);
-  const bounce = new DirectionalLight(0x8ab8ff, 0.5);
+  const bounce = new DirectionalLight(0xcfe2ff, 0.45);
   bounce.position.set(0.6, 0.3, 0.74).multiplyScalar(900);
   scene.add(bounce);
-  scene.add(new HemisphereLight(0xdcecff, 0x33502f, 1.15));
+  scene.add(new HemisphereLight(0xffffff, 0xc6d6e8, 1.0));
 
   /* ---------- terrain ---------- */
   const terrGeo = new PlaneGeometry(SIZE, SIZE, SEG, SEG);
@@ -267,28 +268,25 @@ function boot(root) {
     terrGeo.computeVertexNormals();
     const n = terrGeo.attributes.normal;
     const col = new Float32Array(p.count * 3);
-    const cedarA = new Color(0x21401f), cedarB = new Color(0x35592e), broad = new Color(0x5c8046);
-    const soil = new Color(0x7e6b4e), rock = new Color(0x908a7c), dry = new Color(0xa49b74);
-    const c = new Color(), tmp = new Color();
+    const low = new Color(0xa9c6e2), mid = new Color(0xd2e2f3), high = new Color(0xf4f9ff);
+    const steep = new Color(0x7ea2c8), padC = new Color(0xa3c7ea);
+    const c = new Color();
     for (let i = 0; i < p.count; i++) {
       const x = p.getX(i), y = p.getY(i), z = p.getZ(i);
       const slope = clamp(1 - n.getY(i), 0, 1);
       const h01 = clamp((y + 60) / 400, 0, 1);
       const v1 = vnoise(x * 0.0055 + 3.1, z * 0.0055 + 7.7);
-      const v2 = vnoise(x * 0.019 + 21.5, z * 0.019 + 9.2);
-      c.copy(cedarA).lerp(cedarB, clamp(v1 * 1.35, 0, 1));
-      c.lerp(broad, sstep(v2, 0.56, 0.92) * 0.5);
-      c.lerp(soil, sstep(slope, 0.3, 0.58) * 0.8);
-      c.lerp(rock, sstep(slope, 0.52, 0.78));
-      c.lerp(dry, sstep(h01, 0.72, 0.99) * 0.5);
+      c.copy(low).lerp(mid, sstep(h01, 0.04, 0.5));
+      c.lerp(high, sstep(h01, 0.48, 0.96));
+      c.lerp(steep, sstep(slope, 0.24, 0.7) * 0.55);
+      c.lerp(mid, v1 * 0.1);
       const pm = padMask(x, z);
-      if (pm > 0.002) c.lerp(tmp.copy(soil).lerp(dry, 0.5), pm * 0.85);
-      const sh = 0.88 + v2 * 0.24;
-      col[i * 3] = c.r * sh; col[i * 3 + 1] = c.g * sh; col[i * 3 + 2] = c.b * sh;
+      if (pm > 0.002) c.lerp(padC, pm * 0.8);
+      col[i * 3] = c.r; col[i * 3 + 1] = c.g; col[i * 3 + 2] = c.b;
     }
     terrGeo.setAttribute('color', new BufferAttribute(col, 3));
   }
-  const terrMat = new MeshLambertMaterial({ vertexColors: true, fog: true });
+  const terrMat = new MeshBasicMaterial({ vertexColors: true, fog: true });
   terrMat.onBeforeCompile = (sh) => {
     sh.vertexShader = 'varying vec3 vWP;\n' + sh.vertexShader.replace(
       '#include <begin_vertex>',
@@ -298,27 +296,25 @@ function boot(root) {
       '#include <color_fragment>',
       `#include <color_fragment>
       float camD = length(vWP - cameraPosition);
-      float nearK = 1.0 - smoothstep(90.0, 1000.0, camD);
-      /* 面法線から斜度を求める（急斜面は岩肌、緩斜面は杉林） */
+      float fade = 1.0 - smoothstep(900.0, 2600.0, camD);
+      /* 面法線から斜度と陰影を作る（ライト計算を使わず図面のような均一さを保つ） */
       vec3 fn = normalize(cross(dFdx(vWP), dFdy(vWP)));
       float slope = 1.0 - clamp(abs(fn.y), 0.0, 1.0);
-      float forest = 1.0 - smoothstep(0.40, 0.70, slope);
-      /* 樹冠のざらつき：複数周波数を重ねて針葉樹林の粒状感を出す */
-      float c1 = sin(vWP.x * 1.90) * sin(vWP.z * 2.10);
-      float c2 = sin(vWP.x * 4.70 + 1.3) * sin(vWP.z * 4.10 - 0.7);
-      float c3 = sin(vWP.x * 9.30 - 2.1) * sin(vWP.z * 8.70 + 0.5);
-      float canopy = c1 * 0.55 + c2 * 0.30 + c3 * 0.15;
-      diffuseColor.rgb *= 1.0 + canopy * 0.20 * nearK * forest;
-      /* 林床の色ムラ */
-      diffuseColor.rgb *= 1.0 + sin(vWP.x * 0.21 + 2.0) * sin(vWP.z * 0.18) * 0.06;
-      /* 露出した岩肌・土 */
-      vec3 rock = vec3(0.35, 0.31, 0.27);
-      diffuseColor.rgb = mix(diffuseColor.rgb, rock, smoothstep(0.66, 0.94, slope) * 0.34 * (0.35 + 0.65 * nearK));
-      /* 等高線（測量会社らしさ） */
-      float cf = vWP.y / 24.0;
-      float cg = abs(fract(cf - 0.5) - 0.5) / max(fwidth(cf), 1e-5);
-      float cline = (1.0 - clamp(cg, 0.0, 1.0)) * (1.0 - smoothstep(280.0, 1500.0, camD));
-      diffuseColor.rgb += cline * 0.05 * vec3(0.20, 0.42, 0.85);`
+      float lam = clamp(dot(fn, normalize(vec3(-0.54, 0.62, -0.79))), 0.0, 1.0);
+      diffuseColor.rgb *= 0.90 + 0.14 * lam;
+      diffuseColor.rgb = mix(diffuseColor.rgb, vec3(0.58, 0.70, 0.84), smoothstep(0.30, 0.90, slope) * 0.42);
+      /* 主曲線（25m）と計曲線（5m）：測量図の等高線 */
+      float f1 = vWP.y / 14.0;
+      float major = 1.0 - clamp(abs(fract(f1 - 0.5) - 0.5) / max(fwidth(f1), 1e-5), 0.0, 1.0);
+      float f2 = vWP.y / 3.5;
+      float minor = 1.0 - clamp(abs(fract(f2 - 0.5) - 0.5) / max(fwidth(f2), 1e-5), 0.0, 1.0);
+      diffuseColor.rgb = mix(diffuseColor.rgb, vec3(0.04, 0.29, 0.66), major * 0.62 * fade);
+      diffuseColor.rgb = mix(diffuseColor.rgb, vec3(0.30, 0.50, 0.76), minor * 0.26 * fade);
+      /* 40m の測量メッシュ */
+      vec2 gq = vWP.xz / 30.0;
+      vec2 gg = abs(fract(gq - 0.5) - 0.5) / max(fwidth(gq), vec2(1e-5));
+      float grid = 1.0 - clamp(min(gg.x, gg.y), 0.0, 1.0);
+      diffuseColor.rgb = mix(diffuseColor.rgb, vec3(0.42, 0.58, 0.78), grid * 0.22 * fade);`
     );
   };
   terrMat.customProgramCacheKey = () => 'aso-hero-terrain';
@@ -358,7 +354,7 @@ function boot(root) {
   const bump = (u, c, w) => Math.exp(-Math.pow(wrap1(u - c) / w, 2));
   const speedAt = (u) => {
     const s = Math.max(bump(u, U_LOAD, 0.05), bump(u, U_DROP, 0.05));
-    return 3.4 + 16.4 * (1 - s);
+    return 3.0 + 6.2 * (1 - s);
   };
 
   /* dashed ground track between the two pads */
@@ -384,9 +380,41 @@ function boot(root) {
     g.setAttribute('uv', new BufferAttribute(new Float32Array(uvs), 2));
     g.setIndex(idx);
     scene.add(new Mesh(g, new MeshBasicMaterial({
-      map: dashTexture(), color: 0xbcdcff, transparent: true, opacity: 0.26,
+      map: dashTexture(), color: 0x0d67d8, transparent: true, opacity: 0.55,
       depthWrite: false, side: DoubleSide, fog: true,
       polygonOffset: true, polygonOffsetFactor: -6, polygonOffsetUnits: -6,
+    })));
+  }
+
+  /* 飛行ルート（空中）：水平・垂直の2枚組リボンで、どの角度からも破線が見える */
+  {
+    const N = 480, halfW = 0.26;
+    const CP = [], CT = [];
+    for (let i = 0; i <= N; i++) { CP.push(curve.getPointAt(i / N)); CT.push(curve.getTangentAt(i / N)); }
+    const verts = [], uvs = [], idx = [];
+    const side = new Vector3(), up = new Vector3(0, 1, 0);
+    for (let pass = 0; pass < 2; pass++) {
+      const base = verts.length / 3;
+      let run = 0;
+      for (let i = 0; i <= N; i++) {
+        if (i > 0) run += CP[i].distanceTo(CP[i - 1]);
+        if (pass === 0) side.copy(CT[i]).cross(up).normalize(); else side.copy(up);
+        const uu = run / 3.6;
+        verts.push(
+          CP[i].x + side.x * halfW, CP[i].y + side.y * halfW, CP[i].z + side.z * halfW,
+          CP[i].x - side.x * halfW, CP[i].y - side.y * halfW, CP[i].z - side.z * halfW
+        );
+        uvs.push(uu, 1, uu, 0);
+        if (i < N) { const k = base + i * 2; idx.push(k, k + 1, k + 2, k + 1, k + 3, k + 2); }
+      }
+    }
+    const g = new BufferGeometry();
+    g.setAttribute('position', new BufferAttribute(new Float32Array(verts), 3));
+    g.setAttribute('uv', new BufferAttribute(new Float32Array(uvs), 2));
+    g.setIndex(idx);
+    scene.add(new Mesh(g, new MeshBasicMaterial({
+      map: dashTexture(), color: 0x0d67d8, transparent: true, opacity: 0.34,
+      depthWrite: false, side: DoubleSide, fog: true,
     })));
   }
 
@@ -408,21 +436,21 @@ function boot(root) {
     add(new CircleGeometry(10.3, 48), 0.08);
     add(new RingGeometry(3.0, 3.9, 40), 0.28);
     for (let i = 0; i < 2; i++) {
-      const m = add(new RingGeometry(11.5, 12.7, 64), 0.22, AdditiveBlending);
+      const m = add(new RingGeometry(11.5, 12.7, 64), 0.5);
       m.position.y = 0.7;
       pulses.push({ m, off: i * 0.5 });
     }
     scene.add(g);
   }
-  makePad(LOAD.x, LOAD.z, 0x8fd0ff);
-  makePad(DROP.x, DROP.z, 0x7cc4ff);
+  makePad(LOAD.x, LOAD.z, 0x1a6fd8);
+  makePad(DROP.x, DROP.z, 0x0d67d8);
 
   /* ---------- aircraft (DJI FlyCart 30 silhouette) ---------- */
   const craft = new Group();
   scene.add(craft);
-  const shell = new MeshStandardMaterial({ color: 0x4b545f, metalness: 0.4, roughness: 0.48 });
-  const dark = new MeshStandardMaterial({ color: 0x272d37, metalness: 0.5, roughness: 0.45 });
-  const pale = new MeshStandardMaterial({ color: 0x8a939f, metalness: 0.35, roughness: 0.55 });
+  const shell = new MeshStandardMaterial({ color: 0x39434f, metalness: 0.4, roughness: 0.48 });
+  const dark = new MeshStandardMaterial({ color: 0x1b222c, metalness: 0.5, roughness: 0.45 });
+  const pale = new MeshStandardMaterial({ color: 0x737e8c, metalness: 0.35, roughness: 0.55 });
 
   const body = new Mesh(new BoxGeometry(1.06, 0.5, 1.52), shell);
   body.position.y = 0.04;
@@ -461,7 +489,7 @@ function boot(root) {
     craft.add(mast);
     for (let k = 0; k < 2; k++) {
       const disk = new Mesh(diskGeo, new MeshBasicMaterial({
-        map: rotorTex, color: 0xdceaf8, transparent: true, opacity: k ? 0.42 : 0.5,
+        map: rotorTex, color: 0x6b7d94, transparent: true, opacity: k ? 0.3 : 0.38,
         depthWrite: false, side: DoubleSide, fog: true,
       }));
       disk.position.set(tipX, k ? 0.62 : -0.1, tipZ);
@@ -490,7 +518,7 @@ function boot(root) {
     grp.add(bulb);
     const halo = new Mesh(glowGeo, new MeshBasicMaterial({
       map: glowTex, color, transparent: true, opacity: 0.9,
-      blending: AdditiveBlending, depthWrite: false, fog: false,
+      depthWrite: false, fog: false,
     }));
     halo.scale.setScalar(scale);
     grp.add(halo);
@@ -500,7 +528,7 @@ function boot(root) {
   }
   const navR = navLight(-1.14, 0.12, 1.1, 0xff3b30, 1.6);   /* port  */
   const navG = navLight(1.14, 0.12, 1.1, 0x3ddc84, 1.6);    /* stbd  */
-  const strobe = navLight(0, -0.24, -0.86, 0xffffff, 2.2);
+  const strobe = navLight(0, -0.24, -0.86, 0x0d67d8, 2.2);
 
   /* ---------- sling + payload (verlet) ---------- */
   const CABLE = narrow ? 5.4 : 6.4;
@@ -511,16 +539,16 @@ function boot(root) {
   for (let i = 0; i < NP; i++) { pPos.push(new Vector3(0, -i * segLen, 0)); pOld.push(new Vector3(0, -i * segLen, 0)); }
   const segGeo = new CylinderGeometry(0.045, 0.045, 1, 6, 1);
   segGeo.translate(0, 0.5, 0);
-  const cableMat = new MeshStandardMaterial({ color: 0x8ac7d8, roughness: 0.75, metalness: 0.05 });
+  const cableMat = new MeshStandardMaterial({ color: 0x4e5b6b, roughness: 0.75, metalness: 0.05 });
   const segs = [];
   for (let i = 0; i < NP - 1; i++) { const m = new Mesh(segGeo, cableMat); scene.add(m); segs.push(m); }
 
   /* フレコンバッグ：実機（FlyCart 30）に対して過大にならない寸法にする */
-  const BAG = 1.02;
+  const BAG = 0.78;
   const bagGeo = new LatheGeometry([
     [0.10, -1.00], [0.42, -0.97], [0.66, -0.86], [0.80, -0.62], [0.86, -0.28],
     [0.87, 0.06], [0.84, 0.34], [0.74, 0.56], [0.56, 0.72], [0.34, 0.82], [0.17, 0.90], [0.0, 0.94],
-  ].map(([x, y]) => new Vector3(x * BAG * 1.18, y * BAG * 2.05, 0)), 28);
+  ].map(([x, y]) => new Vector3(x * BAG * 1.42, y * BAG * 1.52, 0)), 28);
   {
     const p = bagGeo.attributes.position;
     for (let i = 0; i < p.count; i++) {
@@ -529,7 +557,7 @@ function boot(root) {
       if (r > 0.02) {
         const ang = Math.atan2(z, x);
         /* 詰め物のふくらみと布のたるみ */
-        const ty = (y + 0.86 * BAG * 2.05) / (1.9 * BAG * 2.05);
+        const ty = (y + 0.86 * BAG * 1.52) / (1.9 * BAG * 1.52);
         const taper = 0.80 + 0.20 * Math.min(1, Math.max(0, ty * 1.45));
         const f = taper
           + 0.045 * Math.sin(ang * 4 + y * 1.6)
@@ -539,7 +567,7 @@ function boot(root) {
       }
     }
     bagGeo.computeVertexNormals();
-    bagGeo.translate(0, -0.86 * BAG * 2.05, 0);
+    bagGeo.translate(0, -0.86 * BAG * 1.52, 0);
   }
   const bagTex = fabricTexture();
   {
@@ -557,14 +585,14 @@ function boot(root) {
       k *= 1 - 0.20 * Math.pow(Math.max(0, t - 0.62) / 0.38, 1.4); /* 絞り口の影 */
       k *= 1 + 0.07 * Math.sin(ang * 4 + 0.8);     /* ベルト位置に沿った明暗 */
       k *= 0.94 + 0.06 * Math.sin(ang * 11 + y * 2.0); /* 布のしわ */
-      k = Math.max(0.3, Math.min(1.12, k));
+      k = Math.max(0.58, Math.min(1.12, k));
       col[i * 3] = k; col[i * 3 + 1] = k; col[i * 3 + 2] = k;
     }
     bagGeo.setAttribute('color', new BufferAttribute(col, 3));
   }
   const bag = new Mesh(bagGeo, new MeshStandardMaterial({
     map: bagTex, bumpMap: bagTex, bumpScale: 0.6,
-    color: 0xcda368, roughness: 1, metalness: 0, vertexColors: true, flatShading: false,
+    color: 0xffc247, roughness: 1, metalness: 0, vertexColors: true, flatShading: false,
   }));
   scene.add(bag);
 
@@ -707,12 +735,12 @@ function boot(root) {
   function placeCamera(dt, snap) {
     const aspect = camera.aspect;
     const wide = aspect >= 1.05;
-    const dist = wide ? 25 : 24;
-    const yaw = Math.atan2(st.vel.x, st.vel.z) + Math.PI + Math.sin(st.t * 0.085) * 0.42 - 0.2;
-    const height = (wide ? 4.2 : 5.4) + Math.sin(st.t * 0.061 + 2.2) * 2.1;
+    const dist = wide ? 35 : 33;
+    const yaw = st.t * 0.055 + Math.sin(st.t * 0.043) * 0.34;
+    const height = (wide ? 9.5 : 12) + Math.sin(st.t * 0.047 + 2.2) * 2.6;
     camWant.set(
-      st.pos.x + Math.sin(yaw) * dist + pointer.x * 2.6,
-      st.pos.y + height + pointer.y * 1.6,
+      st.pos.x + Math.sin(yaw) * dist + pointer.x * 4.5,
+      st.pos.y + height + pointer.y * 2.6,
       st.pos.z + Math.cos(yaw) * dist
     );
     if (snap) camera.position.copy(camWant);
@@ -722,7 +750,7 @@ function boot(root) {
     camera.updateMatrixWorld();
     const halfH = Math.tan((camera.fov * Math.PI) / 360) * camera.position.distanceTo(st.pos);
     const fx = wide ? 0.32 : 0.06;
-    const fy = wide ? 0.4 : 0.16;
+    const fy = wide ? 0.24 : 0.16;
     tmpA.setFromMatrixColumn(camera.matrixWorld, 0);
     tmpB.setFromMatrixColumn(camera.matrixWorld, 1);
     tmpV.copy(st.pos).addScaledVector(tmpA, -fx * halfH * aspect).addScaledVector(tmpB, -fy * halfH);

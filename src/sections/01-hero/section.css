@@ -52,7 +52,7 @@
 .s-hero__grain {
   position: absolute;
   inset: -2%;
-  background: radial-gradient(74% 64% at 62% 42%, rgba(255, 255, 255, 0) 40%, rgba(255, 255, 255, .55) 100%);
+  background: radial-gradient(82% 72% at 64% 46%, rgba(255, 255, 255, 0) 52%, rgba(255, 255, 255, .3) 100%);
 }
 
 /* ---- telemetry HUD ---- */

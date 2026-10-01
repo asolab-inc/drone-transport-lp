@@ -10,7 +10,8 @@
 .s-process__figure { aspect-ratio: 16 / 9; margin-bottom: 18px; border-radius: var(--r-lg); background: var(--bg-soft); border: 1px solid var(--line); }
 .s-process__figure svg { width: 100%; height: 100%; }
 .s-process__photo { margin-bottom: 18px; }
-.s-process__photo img { object-position: center 55%; }
+/* 機体が小さく写っているため、寄せて切り出す */
+.s-process__photo img { object-position: 56% 44%; transform: scale(1.28); }
 
 .s-process__list { display: grid; gap: 10px; margin-top: auto; }
 .s-process__list li { position: relative; padding-left: 22px; font-size: var(--fs-sm); line-height: 1.8; color: var(--text-2); }
